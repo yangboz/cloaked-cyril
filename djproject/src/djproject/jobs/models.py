@@ -12,6 +12,9 @@ class Location(models.Model):
             return "%s,%s,%s" %(self.city,self.state,self.country)
         else:
             return "%s,%s" % (self.city,self.country)
+    class Admin:
+        list_display = ('city','state','country')
+        
 class Job(models.Model):
     pub_date = models.DateField()
     job_title = models.CharField(max_length=50)
