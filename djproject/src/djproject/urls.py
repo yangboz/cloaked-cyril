@@ -1,4 +1,6 @@
 from django.conf.urls import patterns, include, url
+import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from django.contrib import admin
 admin.autodiscover()
@@ -23,3 +25,5 @@ urlpatterns = patterns('',
     (r'^jobs/(?P<job_id>\d+)/$', 'djproject.jobs.views.detail'),
     (r'^jobs/', include('djproject.jobs.urls')),
 )
+
+urlpatterns += staticfiles_urlpatterns()

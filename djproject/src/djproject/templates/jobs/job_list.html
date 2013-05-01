@@ -3,10 +3,34 @@
 {% block title %}Job List{% endblock %}
 
 {% block content %}
+	<script>
+		
+		var mydata = {{object_list|safe}};
+			$(document).ready(function(){
+				jQuery("#list4").jqGrid({
+					datatype: "local",
+					height: 250,
+				   	colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+				   	colModel:[
+				   		{name:'id',index:'id', width:60, sorttype:"int"},
+				   		{name:'invdate',index:'invdate', width:90, sorttype:"date"},
+				   		{name:'name',index:'name', width:100},
+				   		{name:'amount',index:'amount', width:80, align:"right",sorttype:"float"},
+				   		{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
+				   		{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
+				   		{name:'note',index:'note', width:150, sortable:false}		
+				   	],
+				   	multiselect: true,
+				   	caption: "Manipulating Array Data"
+				  });	
+				  
+				  for(var i=0;i<=mydata.length;i++)
+					jQuery("#list4").jqGrid('addRowData',i+1,mydata[i]);
+			});
+		
+			
+	</script>
     <h1>Job List</h1>
-    <ul>
-    {% for job in object_list %}
-        <li><a href="{{ job.id }}">{{ job.job_title }}</a></li>
-    {% endfor %}
-    </ul>
+    <table id="list4"></table>
+	<div id="pager2"></div>
 {% endblock %}
