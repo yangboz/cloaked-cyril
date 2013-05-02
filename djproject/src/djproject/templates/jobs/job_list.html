@@ -30,7 +30,45 @@
 		
 			
 	</script>
+	
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <a class="brand" href="#">荣宇工程</a>
+	    <ul class="nav nav-tabs">
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">工程管理<b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#">2012年工程</a></li>
+	          <li class="divider"></li>
+	        </ul>
+	      </li>
+	      <li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">资金审核管理<b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#">费用审核</a></li>
+	          <li class="divider"></li>
+	          <li><a href="#">工程款审核</a></li>
+	        </ul>
+	      </li>
+	      
+	    </ul>
+	  </div>
+	</div>
+	
     <h1>Job List</h1>
     <table id="list4"></table>
 	<div id="pager2"></div>
+	
+	
+	<div id="messages">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{message.tags}}">
+            <a class="close" data-dismiss="alert">×</a>
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
 {% endblock %}
