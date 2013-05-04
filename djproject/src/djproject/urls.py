@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     
     (r'^jobs/$', 'djproject.jobs.views.index'),
+    (r'^json/$', 'djproject.jobs.views.json'),
     (r'^jobs/(?P<job_id>\d+)/$', 'djproject.jobs.views.detail'),
     (r'^jobs/', include('djproject.jobs.urls')),
 )

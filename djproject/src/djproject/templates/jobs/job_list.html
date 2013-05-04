@@ -8,7 +8,8 @@
 		var mydata = {{object_list|safe}};
 			$(document).ready(function(){
 				jQuery("#list4").jqGrid({
-					datatype: "local",
+                    url:'http://localhost:8000/json/',
+                    datatype: "json",
 					height: 250,
 				   	colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
 				   	colModel:[
