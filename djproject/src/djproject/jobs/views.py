@@ -10,6 +10,9 @@ from django.http import HttpResponse
 
 from django.utils import simplejson
 
+def menus(request):
+    return render_to_response('basemenu.html')
+
 def json(request):
     object_list = [
         {"id":"1","invdate":"2007-5-4","name":"test","note":"note","amount":"200.00","tax":"10.00","total":"210.00"},
