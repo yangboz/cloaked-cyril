@@ -12,23 +12,27 @@
 				height: 250,
 			   	colNames:['序号','姓名','性别', '职务', '人工费/日','身份证','联系方式','备注'],
 			   	colModel:[
-			   		{name:'序号',index:'id', width:60, sorttype:"int"},
-			   		{name:'姓名',index:'name', width:100},
-			   		{name:'性别',index:'amount', width:80, align:"right",sorttype:"float"},
-			   		{name:'职务',index:'tax', width:80, align:"right",sorttype:"float"},		
-			   		{name:'人工费/日',index:'total', width:80,align:"right",sorttype:"float"},
-			   		{name:'身份证',index:'total', width:80,align:"right",sorttype:"float"},
-			   		{name:'联系方式',index:'total', width:80,align:"right",sorttype:"float"},		
-			   		{name:'备注',index:'note', width:150, sortable:false}		
+			   		{name:'id',index:'id', width:60, sorttype:"int"},
+			   		{name:'name',index:'name', width:100},
+			   		{name:'sex',index:'amount', width:80, align:"right",sorttype:"float"},
+			   		{name:'job',index:'tax', width:80, align:"right",sorttype:"float"},
+			   		{name:'laborCost',index:'total', width:80,align:"right",sorttype:"float"},
+			   		{name:'IDcard',index:'total', width:280,align:"right",sorttype:"float"},
+			   		{name:'contact',index:'total', width:280,align:"right",sorttype:"float"},
+			   		{name:'notes',index:'note', width:280, sortable:false}
 			   	],
-			   	multiselect: true,
+			   	multiselect: false,
 			   	caption: "新建花名册"
-			  });	
-			  
-		});
+			  });
+            });
+
+
+
 			
 	</script>
 
+    <input type="button" class="btn" id="add_btn" value="新 增" />
+    <input type="button" class="btn" id="del_btn" value="删 除" />
     <table id="list4"></table>
 	<div id="pager2"></div>
 	

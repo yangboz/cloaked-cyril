@@ -5,7 +5,6 @@
 {% block content %}
 	<script>
 		
-		var mydata = {{object_list|safe}};
 			$(document).ready(function(){
 				jQuery("#list4").jqGrid({
                     url:'http://localhost:8000/json/',
@@ -25,8 +24,6 @@
 				   	caption: "操作数组数据"
 				  });	
 				  
-				  for(var i=0;i<=mydata.length;i++)
-					jQuery("#list4").jqGrid('addRowData',i+1,mydata[i]);
 			});
 		
 			
