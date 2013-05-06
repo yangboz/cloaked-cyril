@@ -31,11 +31,19 @@
 			
 	</script>
 
+    <li><a id="various1" href="#inline1" title="Lorem ipsum dolor sit amet">Inline</a></li>
     <input type="button" class="btn" id="add_btn" value="新 增" />
     <input type="button" class="btn" id="del_btn" value="删 除" />
     <table id="list4"></table>
 	<div id="pager2"></div>
-	
+
+    <div id="inline1" style="width:400px;display: none;">
+        <h3>Inline sample</h3>
+        <p>
+            this is the content of the box
+        </p>
+    </div>
+
 	<div id="messages">
       {% if messages %}
         {% for message in messages %}

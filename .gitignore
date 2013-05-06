@@ -1,3 +1,12 @@
 /djproject/src/djproject/.idea/workspace.xml
 
 *.pyc
+
+/djproject/src/djproject/.idea/djproject.iml
+/djproject/src/djproject/.idea/encodings.xml
+/djproject/src/djproject/.idea/misc.xml
+/djproject/src/djproject/.idea/modules.xml
+/djproject/src/djproject/.idea/other.xml
+/djproject/src/djproject/.idea/scopes/scope_settings.xml
+/djproject/src/djproject/.idea/testrunner.xml
+/djproject/src/djproject/.idea/vcs.xml
