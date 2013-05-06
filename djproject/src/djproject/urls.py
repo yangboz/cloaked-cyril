@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     (r'^jobs/$', 'djproject.jobs.views.index'),
     (r'^json/$', 'djproject.jobs.views.json'),
     (r'^menus/$', 'djproject.jobs.views.menus'),
+    (r'^menus/contact_new', 'djproject.jobs.views.contact'),
     (r'^jobs/(?P<job_id>\d+)/$', 'djproject.jobs.views.detail'),
     (r'^jobs/', include('djproject.jobs.urls')),
 )

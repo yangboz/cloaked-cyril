@@ -19,7 +19,6 @@
 </header>
 <body>
 
-
 {% load tree_menu_tags %}
 
 <!-- Prepare and load tree menu system.-->
@@ -83,10 +82,7 @@
 	</div>
 {% endifequal %}
 
-
-<p>(This example assumes that you have created a menu named "myMenu" in the database via the admin interface)</p>
-
-<p>This is a very basic example of how to use django-treemenus. Extend it to make your menus look good!</p>
+{% block content %}{% endblock %}
 
 </body>
 </html>
