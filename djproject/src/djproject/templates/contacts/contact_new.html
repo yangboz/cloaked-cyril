@@ -7,7 +7,7 @@
     
 		$(document).ready(function(){
 			jQuery("#list4").jqGrid({
-                url:'http://localhost:8000/json/',
+                url:'http://localhost:8000/json',
                 datatype: "json",
 				height: 250,
 			   	colNames:['序号','姓名','性别', '职务', '人工费/日','身份证','联系方式','备注'],
@@ -21,6 +21,7 @@
 			   		{name:'contact',index:'total', width:280,align:"right",sorttype:"float"},
 			   		{name:'notes',index:'note', width:280, sortable:false}
 			   	],
+			   	viewrecords: true,
 			   	multiselect: false,
 			   	caption: "新建花名册"
 			  });
