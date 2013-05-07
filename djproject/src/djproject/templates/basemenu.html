@@ -1,90 +1,98 @@
 <html title="django-treemenus example">
-<header>
-	    <!-- Bootstrap -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/medias/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/medias/bootstrap/bootstrap.dropdown.hack.css" rel="stylesheet" media="screen">
-    <!-- JqueryUI -->
-     <link rel="stylesheet" type="text/css" media="screen" href="/medias/css/jquery-ui-custom.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/medias/css/ui.jqgrid.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/medias/fancyBox/jquery.fancybox.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/medias/css/ui.multiselect.css" />
-    <!-- JqueryUI -->
-    <script src="/medias/js/jquery-1.9.0.min.js" type="text/javascript"></script>
-    <script src="/medias/js/grid.locale-cn.js" type="text/javascript"></script>
-    <script src="/medias/js/jquery.jqGrid.min.js" type="text/javascript"></script>
-    <script src="/medias/fancyBox/jquery.fancybox.js" type="text/javascript"></script>
-    <script src="/medias/js/jquery.form.js" type="text/javascript"></script>
-    <script src="/medias/js/jquery.message.js" type="text/javascript"></script>
-  	<!-- Bootstrap -->
-  	<script src="/medias/bootstrap/js/bootstrap.min.js"></script>
-</header>
-<body>
+	<header>
+		<!-- Bootstrap -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="/medias/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="/medias/bootstrap/bootstrap.dropdown.hack.css" rel="stylesheet" media="screen">
+		<!-- JqueryUI -->
+		<link rel="stylesheet" type="text/css" media="screen" href="/medias/css/jquery-ui-custom.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/medias/css/ui.jqgrid.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/medias/fancyBox/jquery.fancybox.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/medias/css/ui.multiselect.css" />
+		<!-- JqueryUI -->
+		<script src="/medias/js/jquery-1.9.0.min.js" type="text/javascript"></script>
+		<script src="/medias/js/grid.locale-cn.js" type="text/javascript"></script>
+		<script src="/medias/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+		<script src="/medias/fancyBox/jquery.fancybox.js" type="text/javascript"></script>
+		<script src="/medias/js/jquery.form.js" type="text/javascript"></script>
+		<script src="/medias/js/jquery.message.js" type="text/javascript"></script>
+		<!-- Bootstrap -->
+		<script src="/medias/bootstrap/js/bootstrap.min.js"></script>
+	</header>
+	<body>
 
-{% load tree_menu_tags %}
+		{% load tree_menu_tags %}
 
-<!-- Prepare and load tree menu system.-->
-<div style="display:none;">
-{% show_menu "人工管理" "unordered-list"%}
-</div>
+		<!-- Prepare and load tree menu system.-->
+		<div style="display:none;">
+			{% show_menu "人工管理" "unordered-list"%}
+		</div>
 
+		{% ifequal menu_type "unordered-list" %}
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="/project/">荣宇工程-{{projectId}}</a><!-- Hard code this project name.-->
+				<ul class="nav nav-tabs">
+					<!-- Root -->
+					{% for menu_item in menu.root_item.children %}
+					<!-- Level 1-->
+					{% if menu_item.has_children %}
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="{{ menu_item.url }}">{{ menu_item.caption }}<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							{% for child in menu_item.children %}
+							<!-- Level 2-->
+							{% if child.has_children %}
+							<li class="offset-right dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="{{ child.url }}">{{ child.caption }}<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									{% for childchild in child.children %}
+									<!-- Level 3-->
+									{% if childchild.has_children %}
+									<li>
+										<a href="{{ childchild.url }}">{{ childchild.caption }}</a>
+										<ul>
+											{% for childchildchild in childchild.children %}
+											{% show_menu_item childchildchild %}
+											{% endfor %}
+										</ul>
+									</li>
+									<li class="divider"></li>
+									{% else %}
+									<li>
+										<a href="{{ childchild.url }}">{{ childchild.caption }}</a>
+									</li>
+									<li class="divider"></li>
+									{% endif %}
+									<!-- End Level 3 -->
+									{% endfor %}
+								</ul>
+							</li>
+							<li class="divider"></li>
+							{% else %}
+							<li>
+								<a href="{{ child.url }}">{{ child.caption }}</a>
+							</li>
+							<li class="divider"></li>
+							{% endif %}
+							<!-- End Level 2 -->
+							{% endfor %}
+						</ul>
+					</li>
+					{% else %}
+					<li>
+						<a href="{{ menu_item.url }}">{{ menu_item.caption }}</a>
+					</li>
+					{% endif %}
+					<!-- End Level 1 -->
+					{% endfor %}
+				</ul><!-- End Root -->
 
-{% ifequal menu_type "unordered-list" %}
-	<div class="navbar">
-		<div class="navbar-inner">
-			<a class="brand" href="/project/">荣宇工程</a><!-- Hard code this project name.-->
-    <ul class="nav nav-tabs"><!-- Root -->
-        {% for menu_item in menu.root_item.children %}
-                <!-- Level 1-->
-                {% if menu_item.has_children %}                    
-                    <li class="dropdown">
-                    	<a class="dropdown-toggle" data-toggle="dropdown" href="{{ menu_item.url }}">{{ menu_item.caption }}<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            {% for child in menu_item.children %}
-                                <!-- Level 2-->
-                                {% if child.has_children %}
-                                    <li class="offset-right dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="{{ child.url }}">{{ child.caption }}<b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            {% for childchild in child.children %}
-                                                <!-- Level 3-->
-                                                {% if childchild.has_children %}
-                                                    <li><a href="{{ childchild.url }}">{{ childchild.caption }}</a>
-                                                        <ul>
-                                                            {% for childchildchild in childchild.children %}                                                                    
-                                                                {% show_menu_item childchildchild %}
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                {% else %}
-                                                    <li><a href="{{ childchild.url }}">{{ childchild.caption }}</a></li>
-                                                    <li class="divider"></li>
-                                                {% endif %}
-                                                <!-- End Level 3 -->
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                    <li class="divider"></li>
-                                {% else %}
-                                    <li><a href="{{ child.url }}">{{ child.caption }}</a></li>
-                                    <li class="divider"></li>
-                                {% endif %}
-                                <!-- End Level 2 -->
-                            {% endfor %}
-                        </ul>
-                    </li>
-                {% else %}
-                    <li><a href="{{ menu_item.url }}">{{ menu_item.caption }}</a></li>
-                {% endif %}    
-                <!-- End Level 1 -->
-        {% endfor %}
-    </ul><!-- End Root -->
-    
-    	</div>
-	</div>
-{% endifequal %}
+			</div>
+		</div>
+		{% endifequal %}
 
-{% block content %}{% endblock %}
+		{% block content %}{% endblock %}
 
-</body>
+	</body>
 </html>

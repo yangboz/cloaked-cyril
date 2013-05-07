@@ -1,73 +1,110 @@
 {% extends "contacts/base.html" %}
 
 {% block content %}
-    <h1>Contact New</h1>
-    
-    <script>
-    
-		$(document).ready(function(){
-			jQuery("#list4").jqGrid({
-                url:'http://localhost:8000/json',
-                datatype: "json",
-				height: 250,
-			   	colNames:['序号','姓名','性别', '职务', '人工费/日','身份证','联系方式','备注'],
-			   	colModel:[
-			   		{name:'id',index:'id', width:60, sorttype:"int"},
-			   		{name:'name',index:'name', width:100},
-			   		{name:'sex',index:'amount', width:80, align:"right",sorttype:"float"},
-			   		{name:'job',index:'tax', width:80, align:"right",sorttype:"float"},
-			   		{name:'laborCost',index:'total', width:80,align:"right",sorttype:"float"},
-			   		{name:'IDcard',index:'total', width:280,align:"right",sorttype:"float"},
-			   		{name:'contact',index:'total', width:280,align:"right",sorttype:"float"},
-			   		{name:'notes',index:'note', width:280, sortable:false}
-			   	],
-			   	viewrecords: true,
-			   	multiselect: false,
-			   	caption: "新建花名册"
-			  });
-            });
 
+<script>
+	$(document).ready(function() {
+		jQuery("#list4").jqGrid({
+			url : 'http://localhost:8000/json',
+			datatype : "json",
+			height : 250,
+			colNames : ['序号', '姓名', '性别', '职务', '人工费/日', '身份证', '联系方式', '备注'],
+			colModel : [{
+				name : 'id',
+				index : 'id',
+				width : 60,
+				sorttype : "int"
+			}, {
+				name : 'name',
+				index : 'name',
+				width : 100
+			}, {
+				name : 'sex',
+				index : 'amount',
+				width : 80,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'job',
+				index : 'tax',
+				width : 80,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'laborCost',
+				index : 'total',
+				width : 80,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'IDcard',
+				index : 'total',
+				width : 280,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'contact',
+				index : 'total',
+				width : 280,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'notes',
+				index : 'note',
+				width : 280,
+				sortable : false
+			}],
+			viewrecords : true,
+			multiselect : false,
+			caption : "新建花名册"
+		});
+	});
 
-        $(".modalbox").fancybox(); 
-			
-	</script>
+	$("#btn_contact_new").fancybox();
 
-    <a class="modalbox" href="#inline">新建</a></div> 
-    <table id="list4"></table>
-	<div id="pager2"></div>
+</script>
 
-  <div style="display: none;">
-    <div id="inline" >
-      <form id="contact" action="#" method="post" name="contact"><label for="email">新建花名册</label> 
-        
-        <label for="name">姓名</label>   
-        <input id="name" name="name" /> 
+<button id="btn_contact_new" class="btn" href="#inline">
+	新建
+</button>
 
-        <label for="sex">性别</label>  
-        <input id="sex" name="sex" /> 
+<table id="list4"></table>
+<div id="pager2"></div>
 
-        <label for="job">职务</label>   
-        <input id="job" name="job" /> 
+<div style="display: none;">
+	<div id="inline" >
+		<form id="contact" action="#" method="post" name="contact">
+			<label for="email">新建花名册</label>
 
-        <label for="laborCost">人工费</label>   
-        <input id="laborCost" name="laborCost" /> 
+			<label for="name">姓名</label>
+			<input id="name" name="name" />
 
-        <br>
-        <button id="create">新建</button>
-      </form>
-    </div>
-  </div>
+			<label for="sex">性别</label>
+			<input id="sex" name="sex" />
 
+			<label for="job">职务</label>
+			<input id="job" name="job" />
 
-	<div id="messages">
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-{{message.tags}}">
-            <a class="close" data-dismiss="alert">×</a>
-            {{message}}
-          </div>
-        {% endfor %}
-      {% endif %}
-   </div>
-   
+			<label for="laborCost">人工费</label>
+			<input id="laborCost" name="laborCost" />
+
+			<br>
+			<button id="create">
+				新建
+			</button>
+		</form>
+	</div>
+</div>
+
+<div id="messages">
+	{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-{{message.tags}}">
+		<a class="close" data-dismiss="alert">×</a>
+		{{message}}
+	</div>
+	{% endfor %}
+	{% endif %}
+</div>
+
 {% endblock %}
