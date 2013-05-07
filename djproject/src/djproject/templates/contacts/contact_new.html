@@ -28,22 +28,36 @@
             });
 
 
-
+        $(".modalbox").fancybox(); 
 			
 	</script>
 
-    <li><a id="various1" href="#inline1" title="Lorem ipsum dolor sit amet">Inline</a></li>
-    <input type="button" class="btn" id="add_btn" value="新 增" />
-    <input type="button" class="btn" id="del_btn" value="删 除" />
+    <a class="modalbox" href="#inline">新建</a></div> 
     <table id="list4"></table>
 	<div id="pager2"></div>
 
-    <div id="inline1" style="width:400px;display: none;">
-        <h3>Inline sample</h3>
-        <p>
-            this is the content of the box
-        </p>
+  <div style="display: none;">
+    <div id="inline" >
+      <form id="contact" action="#" method="post" name="contact"><label for="email">新建花名册</label> 
+        
+        <label for="name">姓名</label>   
+        <input id="name" name="name" /> 
+
+        <label for="sex">性别</label>  
+        <input id="sex" name="sex" /> 
+
+        <label for="job">职务</label>   
+        <input id="job" name="job" /> 
+
+        <label for="laborCost">人工费</label>   
+        <input id="laborCost" name="laborCost" /> 
+
+        <br>
+        <button id="create">新建</button>
+      </form>
     </div>
+  </div>
+
 
 	<div id="messages">
       {% if messages %}
