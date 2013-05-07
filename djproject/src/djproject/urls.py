@@ -8,6 +8,11 @@ admin.autodiscover()
 # from django.contrib import admin
 # admin.autodiscover()
 
+from django.http import HttpResponse
+
+def projectParam(request,param01):
+    return HttpResponse("The parameter01 is:" + param01)
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'djproject.views.home', name='home'),
@@ -28,6 +33,8 @@ urlpatterns = patterns('',
     (r'^jobs/', include('djproject.jobs.urls')),
     (r'^project/$', 'djproject.project.views.index'),
     (r'^project/contact_new', 'djproject.project.views.contact'),
+    (r'^project/(.+)/$', projectParam),
+     
 )
 
 urlpatterns += staticfiles_urlpatterns()
