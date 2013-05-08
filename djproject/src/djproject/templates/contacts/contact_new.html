@@ -58,9 +58,9 @@
 			multiselect : false,
 			caption : "新建花名册"
 		});
-	});
 
-	$("#btn_contact_new").fancybox();
+		$("#btn_contact_new").fancybox();
+	});
 
 </script>
 
@@ -73,8 +73,8 @@
 
 <div style="display: none;">
 	<div id="inline">
-		<form id="contact" action="#" method="get" name="contact">
-			<label for="email">新建花名册</label>
+		<form id="form_contact_new" action="http://localhost:8000/project/contact_new/" method="get" name="contact">
+			<label>新建花名册</label>
 
 			<label for="name">姓名</label>
 			<input id="name" name="name" />
@@ -98,9 +98,9 @@
 			<input id="notes" name="notes" />
 
 			<br>
-			<button id="create">
+			<input id="create_submit" type="submit">
 				新建
-			</button>
+			</input>
 		</form>
 	</div>
 </div>
