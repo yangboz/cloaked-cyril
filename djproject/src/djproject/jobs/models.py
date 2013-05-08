@@ -7,7 +7,7 @@ class Location(models.Model):
     state = models.CharField(max_length=50,null=True,blank=True)
     country = models.CharField(max_length=50)
     
-    def __str__(self):
+    def __unicode__(self):
         if self.state:
             return "%s,%s,%s" %(self.city,self.state,self.country)
         else:
@@ -21,7 +21,7 @@ class Job(models.Model):
     job_description = models.TextField()
     location = models.ForeignKey(Location)
     
-    def __str__(self):
+    def __unicode__(self):
         return "%s (%s)" %(self.job_title,self.location)
     
 #    class Admin:

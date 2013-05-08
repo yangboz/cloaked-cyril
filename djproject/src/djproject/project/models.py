@@ -7,7 +7,7 @@ class Project(models.Model):
     address = models.CharField(max_length=200)
     year = models.IntegerField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "Project_" + self.name
 
 

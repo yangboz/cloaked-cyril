@@ -9,7 +9,7 @@ class Department(models.Model):
     name = models.CharField(max_length=200, blank=False)
     project = models.ForeignKey(Project)
 
-    def __str__(self):
+    def __unicode__(self):
         return "Department_" + self.name
 
 class Employee(models.Model):
@@ -22,7 +22,7 @@ class Employee(models.Model):
     contact = models.CharField(max_length=300)
     notes = models.CharField(max_length=500)
 
-    def __str__(self):
+    def __unicode__(self):
         return "Empolyee_" + self.name
 
 class Attendance(models.Model):
@@ -30,7 +30,7 @@ class Attendance(models.Model):
     date = models.DateField(default=date.today())
     attend = models.BooleanField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "Attendance_" + self.employee.name + self.date
 
 
@@ -41,7 +41,7 @@ class Salary(models.Model):
     salary = models.IntegerField()
     actualSalary = models.IntegerField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "Salary_" + self.employee.name + self.year + self.month
 
 class SalaryStatement(models.Model):
@@ -51,5 +51,5 @@ class SalaryStatement(models.Model):
     attachment = models.CharField(max_length=500)
     notes = models.CharField(max_length=500)
 
-    def __str__(self):
+    def __unicode__(self):
         return "SalaryStatement_" + self.employee.name
