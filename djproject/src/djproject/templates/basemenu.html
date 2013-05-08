@@ -31,7 +31,7 @@
 		{% ifequal menu_type "unordered-list" %}
 		<div class="navbar">
 			<div class="navbar-inner">
-				<a class="brand" href="/project/">荣宇工程-{{projectId}}</a><!-- Hard code this project name.-->
+				<a class="brand" href="/project/{{projectId}}">荣宇工程-{{projectId}}</a><!-- Hard code this project name.-->
 				<ul class="nav nav-tabs">
 					<!-- Root -->
 					{% for menu_item in menu.root_item.children %}

@@ -9,6 +9,9 @@ from django.utils import simplejson
 from djproject.employees.models import Employee, Department
 
 def index(request,projectId):
+    # Session it
+    request.session.projectId = projectId
+    print "request.session.projectId:"+request.session.projectId
     # Access projectId with 'projectId' variable 
     return render_to_response('project/project_index.html',
                               dictionary={'projectId': projectId},
