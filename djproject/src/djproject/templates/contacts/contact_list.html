@@ -1,0 +1,82 @@
+{% extends "contacts/base.html" %}
+
+{% block content %}
+
+<script>
+	$(document).ready(function() {
+		jQuery("#list4").jqGrid({
+			url : 'http://localhost:8000/json',
+			datatype : "json",
+			height : 250,
+			colNames : ['序号', '姓名', '性别', '职务', '人工费/日', '身份证', '联系方式', '备注'],
+			colModel : [{
+				name : 'id',
+				index : 'id',
+				width : 60,
+				sorttype : "int"
+			}, {
+				name : 'name',
+				index : 'name',
+				width : 100
+			}, {
+				name : 'sex',
+				index : 'amount',
+				width : 80,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'job',
+				index : 'tax',
+				width : 80,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'laborCost',
+				index : 'total',
+				width : 80,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'IDcard',
+				index : 'total',
+				width : 280,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'contact',
+				index : 'total',
+				width : 280,
+				align : "right",
+				sorttype : "float"
+			}, {
+				name : 'notes',
+				index : 'note',
+				width : 280,
+				sortable : false
+			}],
+			viewrecords : true,
+			multiselect : false,
+			caption : "花名册列表"
+		});
+
+		$("#btn_contact_new").fancybox();
+	});
+
+</script>
+
+<table id="list4"></table>
+<div id="pager2"></div>
+
+
+<div id="messages">
+	{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-{{message.tags}}">
+		<a class="close" data-dismiss="alert">×</a>
+		{{message}}
+	</div>
+	{% endfor %}
+	{% endif %}
+</div>
+
+{% endblock %}

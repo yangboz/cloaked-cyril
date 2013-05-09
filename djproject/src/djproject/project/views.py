@@ -8,17 +8,20 @@ from django.utils import simplejson
 
 from djproject.employees.models import Employee, Department
 
+
 def index(request,projectId):
     # Session it
-    request.session.projectId = projectId
-    print "request.session.projectId:"+request.session.projectId
+    request.session['projectId'] = projectId
+    print "request.session.projectId:"+request.session['projectId']
+    context = RequestContext(request)
+    context['session_projectId'] = projectId
     # Access projectId with 'projectId' variable 
     return render_to_response('project/project_index.html',
                               dictionary={'projectId': projectId},
-                              context_instance=RequestContext(request))
+                              context_instance=context)
 
-def contact(request):
-    return render_to_response('contacts/contact_new.html')
+def contact_list(request):
+    return render_to_response('contacts/contact_list.html')
 
 
 def contact_new(request):

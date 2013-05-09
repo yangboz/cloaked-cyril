@@ -29,8 +29,8 @@ urlpatterns = patterns('',
     (r'^jobs/(?P<job_id>\d+)/$', 'djproject.jobs.views.detail'),
     (r'^jobs/', include('djproject.jobs.urls')),
     (r'^project/$', 'djproject.project.views.index'),
-    (r'^project/contact/$', 'djproject.project.views.contact'),
     (r'^project/contact_new/$', 'djproject.project.views.contact_new'),
+    (r'^project/contact_list/$', 'djproject.project.views.contact_list'),
     (r'^project/(?P<projectId>\d+)','djproject.project.views.index'),
 )
 

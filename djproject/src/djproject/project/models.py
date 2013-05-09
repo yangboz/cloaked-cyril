@@ -10,4 +10,3 @@ class Project(models.Model):
     def __unicode__(self):
         return "Project_" + self.name
 
-
