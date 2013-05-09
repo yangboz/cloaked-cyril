@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     (r'^project/$', 'djproject.project.views.index'),
     (r'^project/contact_new/$', 'djproject.project.views.contact_new'),
     (r'^project/contact_list/$', 'djproject.project.views.contact_list'),
+    (r'^project/contact_json/$', 'djproject.project.views.contact_json'),
     (r'^project/(?P<projectId>\d+)','djproject.project.views.index'),
 )
 

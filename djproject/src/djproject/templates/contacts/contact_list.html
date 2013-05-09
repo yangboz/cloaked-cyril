@@ -5,8 +5,9 @@
 <script>
 	$(document).ready(function() {
 		jQuery("#list4").jqGrid({
-			url : 'http://localhost:8000/json',
+			url : 'http://127.0.0.1:8000/project/contact_json',
 			datatype : "json",
+			mtype: 'GET',
 			height : 250,
 			colNames : ['序号', '姓名', '性别', '职务', '人工费/日', '身份证', '联系方式', '备注'],
 			colModel : [{
