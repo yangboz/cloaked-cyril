@@ -5,7 +5,7 @@
 <script>
 	$(document).ready(function() {
 		jQuery("#list4").jqGrid({
-			url : 'http://localhost:8000/json',
+			url : 'http://127.0.0.1:8000/json',
 			datatype : "json",
 			height : 250,
 			colNames : ['序号', '姓名', '性别', '职务', '人工费/日', '身份证', '联系方式', '备注'],
@@ -73,7 +73,7 @@
 
 <div style="display: none;">
 	<div id="inline">
-		<form id="form_contact_new" action="http://localhost:8000/project/contact_new/" method="get" name="contact">
+		<form id="form_contact_new" action="http://127.0.0.1:8000/project/contact_new/" method="get" name="contact">
 			<label>新建花名册</label>
 
 			<label for="name">姓名</label>
