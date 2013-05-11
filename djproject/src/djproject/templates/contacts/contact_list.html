@@ -1,9 +1,15 @@
+<style>
+	.ui-jqgrid-title{
+		font-size: 12px;
+	}
+</style>
 {% extends "contacts/base.html" %}
 
 {% block content %}
 
 <script>
 	//@see: http://www.trirand.com/blog/jqgrid/jqgrid.html
+	//@see: http://blog.csdn.net/a416090287/article/details/8334070
 	$(document).ready(function() {
 		jQuery("#grid_id").jqGrid({
 			url : 'http://127.0.0.1:8000/project/contact_json',
@@ -60,6 +66,12 @@
 			multiselect : false,
 			caption : "花名册列表",
 			pager: '#grid_pager',
+			ondblClickRow: function(id){   //双击行 
+                alert("You double click row with id: "+id);  
+            },   
+            onSelectRow: function(ids) { //单击选择行  
+                alert("You click row with id: "+ids);
+            },  
 		});
 		
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false});
