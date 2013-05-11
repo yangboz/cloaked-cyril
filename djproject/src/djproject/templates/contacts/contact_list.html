@@ -3,8 +3,9 @@
 {% block content %}
 
 <script>
+	//@see: http://www.trirand.com/blog/jqgrid/jqgrid.html
 	$(document).ready(function() {
-		jQuery("#list4").jqGrid({
+		jQuery("#grid_id").jqGrid({
 			url : 'http://127.0.0.1:8000/project/contact_json',
 			datatype : "json",
 			mtype: 'GET',
@@ -57,16 +58,21 @@
 			}],
 			viewrecords : true,
 			multiselect : false,
-			caption : "花名册列表"
+			caption : "花名册列表",
+			pager: '#grid_pager',
 		});
-
-		$("#btn_contact_new").fancybox();
+		
+		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false});
+		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false,search:false});
+		// jQuery("#grid_id").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
+		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{});
+		
 	});
 
 </script>
 
-<table id="list4"></table>
-<div id="pager2"></div>
+<table id="grid_id"></table>
+<div id="grid_pager"></div>
 
 
 <div id="messages">
