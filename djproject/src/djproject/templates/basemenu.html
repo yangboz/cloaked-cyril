@@ -38,19 +38,19 @@
 				$('select').change(function() {
 		          	// alert($(this).val());
 		          	//Ajax call
-		          	$.ajax({
-					    type:"POST",
-					    url:"http://127.0.0.1:8000/project/setProjectId/",
-					    dataType: "json",
-					    data:{
+		          	$.post(
+					    // type:"POST",
+					    "http://127.0.0.1:8000/project/setProjectId/",
+					    // dataType: "json",
+					    {
 					    	'projectId':$(this).val()
 					    },
-					    success: function(json)
+					    function(results)
 					    {
 					        //specifying a dataType of json makes jQuery pre-eval the response for us
-					        alert(json.message);
+					        // alert(results);
 					    }
-					 });
+					 );
 			    });
 			});
 		</script>

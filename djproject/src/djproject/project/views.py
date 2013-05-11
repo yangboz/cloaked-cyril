@@ -9,6 +9,8 @@ from django.utils import simplejson
 from djproject.employees.models import Employee, Department
 from djproject.project.models import Project
 
+from django.views.decorators.csrf import csrf_exempt
+
 def index(request):
     projects = getProjects()
     # Session it with default value.
@@ -25,14 +27,15 @@ def index(request):
                                           'projects':projects
                                           },
                               context_instance=context)
-
+@csrf_exempt
 def setProjectId(request):
-    print("POST projectId:"+request.POST.projectId)
-    if request.POST.projectId:
-        request.session['projectId'] =  request.POST.projectId
-        return HttpResponse(status=200)
+    if request.is_ajax() and request.method == "POST":
+        mimetype = "application/json";
+        request.session['projectId'] =  request.POST["projectId"]
+#        print(request.POST["projectId"])
+        return HttpResponse(request.session['projectId'], mimetype);
     else:
-        return HttpResponse(status=500)
+        return HttpResponse("This is not an valid request");
 
 def getProjects():
     # Model
