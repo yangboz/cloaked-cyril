@@ -14,23 +14,22 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate,login,logout
 
+@csrf_exempt
 def login_view(request):    
     user = authenticate(username=request.POST['username'], password=request.POST['password'])
     if user is not None:
         login(request, user)    
-        print request.user    
+        print("request.user"+request.user)    
         projects = getProjects()
         # Session it with default value.
         projectId = projects[0].name
-        return render_to_response('project/project_index.html',
-                                  dictionary={
-                                          'username': request.user,
-                                          'projectId': projectId
-                                          });
+        mimetype = "application/json";
+        return HttpResponse(projectId, mimetype);
     else:
         #Empty handler
         return HttpResponse(status=404)
-
+    
+@csrf_exempt
 def logout_view(request):
     logout(request)
     return HttpResponse(status=204)

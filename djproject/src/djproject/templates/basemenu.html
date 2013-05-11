@@ -47,9 +47,9 @@
 				  // }
 				// });
 				{% if request.user.is_authenticated %}
-					$('#myModal').modal('hide');
+					$('#loginModal').modal('hide');
 				{% else %}
-					$('#myModal').modal('show');
+					$('#loginModal').modal('show');
 				{% endif %}
 				//AcknowlegeInput
 				//@see:http://averagemarcus.github.io/Bootstrap-AcknowledgeInputs/#using
@@ -72,12 +72,30 @@
 					    }
 					 );
 			    });
+			    //Login button
+			    $('#loginBtn').click(function(){
+			    	//Ajax call
+		          	$.post(
+					    // type:"POST",
+					    "http://127.0.0.1:8000/project/login/",
+					    // dataType: "json",
+					    {
+					    	'username':$("#usernameInput").val(),
+					    	'password':$("#passwordInput").val()
+					    },
+					    function(results)
+					    {
+					        //specifying a dataType of json makes jQuery pre-eval the response for us
+					        alert(results);
+					    }
+					 );
+			    });
 			});
 		</script>
 	</header>
 	<body>
 		<!-- Modal -->
-		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-header">
 		    <h3 id="myModalLabel"></h3>
 		  </div>
@@ -86,39 +104,24 @@
 		  		<li>
 			  		<label>用户名:</label>
 				    <div class="input-append" data-role="acknowledge-input">
-				        <input type="text" required="required" placeholder="请输入用户名" data-type="text" />
+				        <input id="usernameInput" type="text" required="required" placeholder="请输入用户名" data-type="text" />
 				        <div data-role="acknowledgement"><i></i></div>
 				    </div>
 			    </li>
 			    <li>
 			  		<label>密码:</label>
 				    <div class="input-append" data-role="acknowledge-input">
-				        <input type="password" required="required" placeholder="请输入密码" data-type="text" />
+				        <input id="passwordInput" type="password" required="required" placeholder="请输入密码" data-type="text" />
 				        <div data-role="acknowledgement"><i></i></div>
 				    </div>
 			    </li>
 		  	</ul>
 		  </div>
 		  <div class="modal-footer">
-			    <button class="btn" type="submit">登录</button>
+			    <button id="loginBtn" class="btn" type="submit">登录</button>
 			</div>
 		</div>
 		
-		<!--
-		{% if request.user.is_authenticated %}
-			<div id="loggedInDiv" class="pull-right">
-				<a href=#>欢迎您：{{request.user}}</a>&nbsp;&nbsp;
-				<a class="btn danger small" href="{% url depotapp.views.logout_view %}">注销</a>
-			</div>
-		{% else %}
-	      <form action="{% url djproject.project.views.login_view %}" method='post' class="pull-right">
-			{% csrf_token %}
-	        <input name='username' class="input-small" type="text" placeholder="用户名">
-	        <input name='password' class="input-small" type="password" placeholder="密码">
-	        <button class="btn" type="submit">登录</button>
-	      </form>
-		{% endif %}
-		-->
 
 		{% load tree_menu_tags %}
 
