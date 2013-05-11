@@ -75,20 +75,28 @@
 			    //Login button
 			    $('#loginBtn').click(function(){
 			    	//Ajax call
-		          	$.post(
-					    // type:"POST",
-					    "http://127.0.0.1:8000/project/login/",
-					    // dataType: "json",
-					    {
+		          	$.ajax({
+					    type:"POST",
+					    url:"http://127.0.0.1:8000/project/login/",
+					    dataType: "json",
+					    data:{
 					    	'username':$("#usernameInput").val(),
 					    	'password':$("#passwordInput").val()
 					    },
-					    function(results)
+					    success:function(result,status,xhr)
 					    {
 					        //specifying a dataType of json makes jQuery pre-eval the response for us
-					        alert(results);
+					        // alert(result);
+					        console.log("Login result:",result);
+					        $('#loginModal').modal('hide');
+					    },
+					    error:function(xhr,status,error)
+					    {
+					        //specifying a dataType of json makes jQuery pre-eval the response for us
+					        // alert(results);
+					        console.log("Login error:",error);
 					    }
-					 );
+					 });
 			    });
 			});
 		</script>

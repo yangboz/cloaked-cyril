@@ -10,7 +10,6 @@ from djproject.employees.models import Employee, Department
 from djproject.project.models import Project
 
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate,login,logout
 
@@ -19,12 +18,10 @@ def login_view(request):
     user = authenticate(username=request.POST['username'], password=request.POST['password'])
     if user is not None:
         login(request, user)    
-        print("request.user"+request.user)    
-        projects = getProjects()
-        # Session it with default value.
-        projectId = projects[0].name
+#        print("request.user"+str(user))    
         mimetype = "application/json";
-        return HttpResponse(projectId, mimetype);
+        username = request.POST['username']
+        return HttpResponse(simplejson.dumps(username), mimetype);
     else:
         #Empty handler
         return HttpResponse(status=404)
