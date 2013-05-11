@@ -70,7 +70,10 @@
                 alert("You double click row with id: "+id);  
             },   
             onSelectRow: function(ids) { //单击选择行  
-                alert("You click row with id: "+ids);
+                // alert("You click row with id: "+ids);
+                var gr = jQuery("#grid_id").jqGrid('getGridParam','selrow');
+				if( gr != null ) jQuery("#grid_id").jqGrid('viewGridRow',gr,{height:280,reloadAfterSubmit:false});
+				else alert("Please Select Row");
             },  
 		});
 		
