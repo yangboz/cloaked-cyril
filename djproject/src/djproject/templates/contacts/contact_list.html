@@ -1,8 +1,3 @@
-<style>
-	.ui-jqgrid-title{
-		font-size: 12px;
-	}
-</style>
 {% extends "contacts/base.html" %}
 
 {% block content %}
@@ -77,10 +72,10 @@
             },  
 		});
 		
-		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false});
+		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:true,edit:false});
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false,search:false});
 		// jQuery("#grid_id").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
-		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{});
+		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{});
 		
 	});
 
