@@ -10,6 +10,8 @@ admin.autodiscover()
 
 from django.http import HttpResponse
 
+from djproject.project.views import login_view,logout_view
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'djproject.views.home', name='home'),
@@ -36,6 +38,8 @@ urlpatterns = patterns('',
     (r'^duty/duty_new/$', 'djproject.duty.views.duty_new'),
     (r'^duty/duty_list/$', 'djproject.duty.views.duty_list'),
     (r'^duty/duty_json/$', 'djproject.duty.views.duty_json'),
+    (r'^accounts/login/$', login_view),
+    (r'^accounts/logout/$', logout_view),
 )
 
 urlpatterns += staticfiles_urlpatterns()
