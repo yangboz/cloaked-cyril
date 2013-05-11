@@ -29,10 +29,9 @@ urlpatterns = patterns('',
     (r'^jobs/(?P<job_id>\d+)/$', 'djproject.jobs.views.detail'),
     (r'^jobs/', include('djproject.jobs.urls')),
     (r'^project/$', 'djproject.project.views.index'),
-    (r'^project/contact_new/$', 'djproject.project.views.contact_new'),
-    (r'^project/contact_list/$', 'djproject.project.views.contact_list'),
-    (r'^project/contact_json/$', 'djproject.project.views.contact_json'),
-    (r'^project/(?P<projectId>\d+)','djproject.project.views.index'),
+    (r'^contact/contact_new/$', 'djproject.contact.views.contact_new'),
+    (r'^contact/contact_list/$', 'djproject.contact.views.contact_list'),
+    (r'^contact/contact_json/$', 'djproject.contact.views.contact_json'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

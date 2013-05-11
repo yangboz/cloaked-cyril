@@ -1,15 +1,12 @@
-{% extends "duty/base.html" %}
+{% extends "contacts/base.html" %}
 
 {% block content %}
 
 <script>
-	//@see: http://www.trirand.com/blog/jqgrid/jqgrid.html
-	//@see: http://blog.csdn.net/a416090287/article/details/8334070
 	$(document).ready(function() {
-		jQuery("#grid_id").jqGrid({
-			url : 'http://127.0.0.1:8000/contact/contact_json',
+		jQuery("#list4").jqGrid({
+			url : 'http://127.0.0.1:8000/json',
 			datatype : "json",
-			mtype: 'GET',
 			height : 250,
 			colNames : ['序号', '姓名', '性别', '职务', '人工费/日', '身份证', '联系方式', '备注'],
 			colModel : [{
@@ -59,31 +56,54 @@
 			}],
 			viewrecords : true,
 			multiselect : false,
-			caption : "花名册列表",
-			pager: '#grid_pager',
-			ondblClickRow: function(id){   //双击行 
-                alert("You double click row with id: "+id);  
-            },   
-            onSelectRow: function(ids) { //单击选择行  
-                // alert("You click row with id: "+ids);
-                var gr = jQuery("#grid_id").jqGrid('getGridParam','selrow');
-				if( gr != null ) jQuery("#grid_id").jqGrid('viewGridRow',gr,{height:280,reloadAfterSubmit:false});
-				else alert("Please Select Row");
-            },  
+			caption : "新建花名册"
 		});
-		
-		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:true,edit:false});
-		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false,search:false});
-		// jQuery("#grid_id").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
-		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{});
-		
+
+		$("#btn_contact_new").fancybox();
 	});
 
 </script>
 
-<table id="grid_id"></table>
-<div id="grid_pager"></div>
+<button id="btn_contact_new" class="btn" href="#inline">
+	新建
+</button>
 
+<table id="list4"></table>
+<div id="pager2"></div>
+
+<div style="display: none;">
+	<div id="inline">
+		<form id="form_contact_new" action="http://127.0.0.1:8000/project/contact_new/" method="get" name="contact">
+			<label>新建花名册</label>
+
+			<label for="name">姓名</label>
+			<input id="name" name="name" />
+
+			<label for="sex">性别</label>
+			<input id="sex" name="sex" />
+
+			<label for="job">职务</label>
+			<input id="job" name="job" />
+
+			<label for="laborCost">人工费</label>
+			<input id="laborCost" name="laborCost" />
+
+			<label for="IDCard">身份证</label>
+			<input id="IDCard" name="IDCard" />
+
+			<label for="contact">联系方式</label>
+			<input id="contact" name="contact" />
+
+			<label for="notes">备注</label>
+			<input id="notes" name="notes" />
+
+			<br>
+			<input id="create_submit" type="submit">
+				新建
+			</input>
+		</form>
+	</div>
+</div>
 
 <div id="messages">
 	{% if messages %}
