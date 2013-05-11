@@ -7,16 +7,23 @@ from django.template import RequestContext
 from django.utils import simplejson
 
 from djproject.employees.models import Employee, Department
+from djproject.project.models import Project
 
-def index(request,projectId):
+def index(request):
+    projects = getProjects()
     # Session it
+    projectId = projects[0].name
     request.session['projectId'] = projectId
     print "request.session.projectId:"+request.session['projectId']
+    # Context
     context = RequestContext(request)
     context['session_projectId'] = projectId
     # Access projectId with 'projectId' variable 
     return render_to_response('project/project_index.html',
-                              dictionary={'projectId': projectId},
+                              dictionary={
+                                          'projectId': projectId,
+                                          'projects':projects
+                                          },
                               context_instance=context)
     
 def contact_json(request):
@@ -35,7 +42,12 @@ def contact_json(request):
     return HttpResponse(simplejson.dumps(object_list))
 
 def contact_list(request):
-    return render_to_response('contacts/contact_list.html')
+    projects = getProjects()
+    return render_to_response(
+                                'contacts/contact_list.html',
+                                dictionary={'projects':projects},
+                                context_instance=RequestContext(request)
+                              )
 
 
 def contact_new(request):
@@ -46,3 +58,8 @@ def contact_new(request):
 
 	return HttpResponse(Employee.objects.filter(name=name))
 
+def getProjects():
+    # Model
+    projects = Project.objects.all()
+    print "projects:"+str(projects)
+    return projects
