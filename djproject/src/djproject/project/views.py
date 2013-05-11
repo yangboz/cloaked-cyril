@@ -11,7 +11,7 @@ from djproject.project.models import Project
 
 def index(request):
     projects = getProjects()
-    # Session it
+    # Session it with default value.
     projectId = projects[0].name
     request.session['projectId'] = projectId
     print "request.session.projectId:"+request.session['projectId']
@@ -25,6 +25,14 @@ def index(request):
                                           'projects':projects
                                           },
                               context_instance=context)
+
+def setProjectId(request):
+    print("POST projectId:"+request.POST.projectId)
+    if request.POST.projectId:
+        request.session['projectId'] =  request.POST.projectId
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=500)
 
 def getProjects():
     # Model

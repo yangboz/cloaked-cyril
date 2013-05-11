@@ -34,6 +34,24 @@
 			//@see:http://silviomoreto.github.io/bootstrap-select/
 			$(document).ready(function() {
 				$('select').selectpicker();
+				//Change handler
+				$('select').change(function() {
+		          	// alert($(this).val());
+		          	//Ajax call
+		          	$.ajax({
+					    type:"POST",
+					    url:"http://127.0.0.1:8000/project/setProjectId/",
+					    dataType: "json",
+					    data:{
+					    	'projectId':$(this).val()
+					    },
+					    success: function(json)
+					    {
+					        //specifying a dataType of json makes jQuery pre-eval the response for us
+					        alert(json.message);
+					    }
+					 });
+			    });
 			});
 		</script>
 	</header>
@@ -53,7 +71,7 @@
 				<div>
 					<select class="selectpicker" data-width="100px">
 						{% for project in projects %}
-					    <option>{{ project.name }}</option>
+					    <option>{{ project.year }}</option>
 					    {% endfor %}
 					</select>
 				</div>
