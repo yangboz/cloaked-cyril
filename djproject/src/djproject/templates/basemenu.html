@@ -65,10 +65,15 @@
 					    {
 					    	'projectId':$(this).val()
 					    },
-					    function(results)
+					    function(result,status,xhr)
 					    {
 					        //specifying a dataType of json makes jQuery pre-eval the response for us
 					        // alert(results);
+					        // Hide project selector model.
+					         $('#projectSelModal').modal('hide');
+					         console.log("Selected project id:",result);
+					         // Update ahref's label
+					         $("#projectAherf").text($("#projectAherf").text()+result);
 					    }
 					 );
 			    });
@@ -87,8 +92,10 @@
 					    {
 					        //specifying a dataType of json makes jQuery pre-eval the response for us
 					        // alert(result);
-					        console.log("Login result:",result);
+					        console.log("Logged in username:",result);
 					        $('#loginModal').modal('hide');
+					        // Show project selector model.
+					         $('#projectSelModal').modal('show');
 					    },
 					    error:function(xhr,status,error)
 					    {
@@ -102,7 +109,8 @@
 		</script>
 	</header>
 	<body>
-		<!-- Modal -->
+		<!-- Modals -->
+		<!-- LoginModel -->
 		<div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-header">
 		    <h3 id="myModalLabel"></h3>
@@ -129,6 +137,23 @@
 			    <button id="loginBtn" class="btn" type="submit">登录</button>
 			</div>
 		</div>
+		<!-- Project Selector Model -->
+		<div id="projectSelModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+		    <h3 id="myModalLabel"></h3>
+		  </div>
+		  <div class="modal-body">
+		  	<div class="span12 input-append" data-role="acknowledge-input">
+                <select required="required" class="input-xlarge">
+                	<option value="">请选择一个工程</option>
+                	{% for project in projects %}
+				    	<option>{{ project.year }}</option>
+				    {% endfor %}
+                </select>
+                <div data-role="acknowledgement"><i></i></div>
+            </div>
+		  </div>
+		</div>
 		
 
 		{% load tree_menu_tags %}
@@ -141,14 +166,7 @@
 		{% ifequal menu_type "unordered-list" %}
 		<div class="navbar">
 			<div class="navbar-inner">
-				<a class="brand">荣宇工程</a>
-				<div>
-					<select class="selectpicker" data-width="100px">
-						{% for project in projects %}
-					    <option>{{ project.year }}</option>
-					    {% endfor %}
-					</select>
-				</div>
+				<a id="projectAherf" class="brand">荣宇工程-</a>
 				<!-- Hard code this project name.-->
 				<ul class="nav nav-tabs">
 					<!-- Root -->

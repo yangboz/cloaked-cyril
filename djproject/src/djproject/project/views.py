@@ -21,6 +21,8 @@ def login_view(request):
 #        print("request.user"+str(user))    
         mimetype = "application/json";
         username = request.POST['username']
+        # Session it
+        request.session['username'] = username
         return HttpResponse(simplejson.dumps(username), mimetype);
     else:
         #Empty handler
