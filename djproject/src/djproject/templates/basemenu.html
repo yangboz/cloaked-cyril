@@ -49,13 +49,34 @@
 				{% if request.user.is_authenticated %}
 					$('#loginModal').modal('hide');
 				{% else %}
-					$('#loginModal').modal('show');
+					$('#loginModal').modal('hide');
 				{% endif %}
 				//AcknowlegeInput
 				//@see:http://averagemarcus.github.io/Bootstrap-AcknowledgeInputs/#using
 				$().acknowledgeinput();
-				//Change handler
-				$('select').change(function() {
+				//Get projectId
+				//Ajax call
+	          	$.ajax({
+				    type:"GET",
+				    url:"http://127.0.0.1:8000/project/getProjectId/",
+				    dataType: "json",
+				    success:function(result,status,xhr)
+				    {
+				        //specifying a dataType of json makes jQuery pre-eval the response for us
+				        // alert(result);
+				        console.log("GetProjectId:",result);
+				        //TODO:ProjectId selection
+				         $('#projectSelect').val(result);
+				    },
+				    error:function(xhr,status,error)
+				    {
+				        //specifying a dataType of json makes jQuery pre-eval the response for us
+				        // alert(results);
+				        console.log("GetProjectId error:",error);
+				    }
+				 });
+				//ProjectId change handler
+				$('#projectSelect').change(function() {
 		          	// alert($(this).val());
 		          	//Ajax call
 		          	$.post(
@@ -73,7 +94,7 @@
 					         $('#projectSelModal').modal('hide');
 					         console.log("Selected project id:",result);
 					         // Update ahref's label
-					         $("#projectAherf").text($("#projectAherf").text()+result);
+					         // $("#projectAherf").text($("#projectAherf").text()+result);
 					    }
 					 );
 			    });
@@ -120,14 +141,14 @@
 		  		<li>
 			  		<label>用户名:</label>
 				    <div class="input-append" data-role="acknowledge-input">
-				        <input id="usernameInput" type="text" required="required" placeholder="请输入用户名" data-type="text" />
+				        <input style="height: 30px;" id="usernameInput" type="text" required="required" placeholder="请输入用户名" data-type="text" />
 				        <div data-role="acknowledgement"><i></i></div>
 				    </div>
 			    </li>
 			    <li>
 			  		<label>密码:</label>
 				    <div class="input-append" data-role="acknowledge-input">
-				        <input id="passwordInput" type="password" required="required" placeholder="请输入密码" data-type="text" />
+				        <input style="height: 30px;" id="passwordInput" type="password" required="required" placeholder="请输入密码" data-type="text" />
 				        <div data-role="acknowledgement"><i></i></div>
 				    </div>
 			    </li>
@@ -144,10 +165,10 @@
 		  </div>
 		  <div class="modal-body">
 		  	<div class="span12 input-append" data-role="acknowledge-input">
-                <select required="required" class="input-xlarge">
+                <select id="projectSelect" required="required" class="input-xlarge">
                 	<option value="">请选择一个工程</option>
                 	{% for project in projects %}
-				    	<option>{{ project.year }}</option>
+				    	<option value="{{ project.year }}">{{ project.year }}</option>
 				    {% endfor %}
                 </select>
                 <div data-role="acknowledgement"><i></i></div>
@@ -162,11 +183,20 @@
 		<div style="display:none;">
 			{% show_menu "人工管理" "unordered-list"%}
 		</div>
-
+		
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a id="projectAherf" class="brand">荣宇工程</a>
+				<select required="required" class="input-xlarge">
+                	{% for project in projects %}
+				    	<option>{{ project.year }}</option>
+				    {% endfor %}
+                </select>
+			</div>
+		</div>
 		{% ifequal menu_type "unordered-list" %}
 		<div class="navbar">
 			<div class="navbar-inner">
-				<a id="projectAherf" class="brand">荣宇工程-</a>
 				<!-- Hard code this project name.-->
 				<ul class="nav nav-tabs">
 					<!-- Root -->

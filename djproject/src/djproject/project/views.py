@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth import authenticate,login,logout
 import os
-from djproject.project.forms import MyPhotoForm
+#from djproject.project.forms import MyPhotoForm
 from djproject.project.models import MyPhoto
 
 @csrf_exempt
@@ -39,17 +39,11 @@ def logout_view(request):
 
 def index(request):
     projects = getProjects()
-    # Session it with default value.
-    projectId = projects[0].name
-    request.session['projectId'] = projectId
-    print "request.session.projectId:"+request.session['projectId']
     # Context
     context = RequestContext(request)
-    context['session_projectId'] = projectId
     # Access projectId with 'projectId' variable 
     return render_to_response('project/project_index.html',
                               dictionary={
-                                          'projectId': projectId,
                                           'projects':projects
                                           },
                               context_instance=context)
@@ -61,6 +55,22 @@ def setProjectId(request):
         request.session['projectId'] =  request.POST["projectId"]
         print(" request.session.projectId:"+request.session['projectId'])
         return HttpResponse(request.session['projectId'], mimetype);
+    else:
+        return HttpResponse("This is not an valid request");
+    
+@csrf_exempt
+def getProjectId(request):
+    #@see:http://www.lichun.cc/blog/2012/06/a-simple-ajax-example-on-django-1-4/
+    if request.is_ajax() and request.method == "GET":
+        mimetype = "application/json";
+        #if session kept.
+        projectId = request.session['projectId']
+        if projectId is None:
+            projects = getProjects()
+            # Session it with default value.
+            projectId = projects[0].year
+        print(" getProjectId:"+projectId)
+        return HttpResponse(simplejson.dumps(projectId), mimetype);
     else:
         return HttpResponse("This is not an valid request");
 
