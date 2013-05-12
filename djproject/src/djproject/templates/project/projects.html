@@ -1,0 +1,112 @@
+<html title="django-treemenus example">
+	<header>
+		<!-- Bootstrap -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="/medias/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="/medias/bootstrap/extensions/dropdown/bootstrap.dropdown.hack.css" rel="stylesheet" media="screen">
+		<link href="/medias/bootstrap/extensions/select/bootstrap-select.css" rel="stylesheet" media="screen">
+		<!-- jQueryUI -->
+		<link rel="stylesheet" type="text/css" media="screen" href="/medias/css/jquery-ui-custom.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/medias/css/ui.jqgrid.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/medias/fancyBox/jquery.fancybox.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="/medias/css/ui.multiselect.css" />
+		<!-- jQueryUI -->
+		<script src="/medias/js/jquery-1.9.0.min.js" type="text/javascript"></script>
+		<script src="/medias/js/grid.locale-cn.js" type="text/javascript"></script>
+		<script src="/medias/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+		<script src="/medias/fancyBox/jquery.fancybox.js" type="text/javascript"></script>
+		<script src="/medias/js/jquery.form.js" type="text/javascript"></script>
+		<script src="/medias/js/jquery.message.js" type="text/javascript"></script>
+		<!-- Bootstrap -->
+		<script src="/medias/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/medias/bootstrap/extensions/select/bootstrap-select.js"></script>
+		<script src="/medias/bootstrap/extensions/bootbox/bootbox.js"></script>
+		<script src="/medias/bootstrap/extensions/acknowledgeInput/bootstrap-acknowledgeinput.min.js"></script>
+		<!-- jqGrid title font-size -->
+		<style>
+			.ui-jqgrid-title{
+				font-size: 12px;
+			}
+			.ui-jqdialog-title{
+				font-size: 12px;
+			}
+		</style>
+		<script>
+			//Enable Bootstrap-Select via JavaScript:
+			//@see:http://silviomoreto.github.io/bootstrap-select/
+			$(document).ready(function() {
+				$('select').selectpicker();
+				//Change handler
+				$('select').change(function() {
+		          	// alert($(this).val());
+		          	//Ajax call
+		          	$.post(
+					    // type:"POST",
+					    "http://127.0.0.1:8000/project/setProjectId/",
+					    // dataType: "json",
+					    {
+					    	'projectId':$(this).val()
+					    },
+					    function(results)
+					    {
+					        //specifying a dataType of json makes jQuery pre-eval the response for us
+					        // alert(results);
+					    }
+					 );
+			    });
+			});
+		</script>
+	</header>
+	<body>
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a id="projectAherf" class="brand">荣宇工程-</a>
+
+				<div class="btn-toolbar">
+					<div class="btn-group">
+					  <<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">工程管理<span class="caret"></span></button>>
+					  <ul class="dropdown-menu">
+					    <!-- dropdown menu links -->
+					    
+					    <li class="dropdown-submenu">
+					      <a tabindex="-1" href="#">2012</a>
+					      <ul class="dropdown-menu">
+					        <li>
+					        	<a tabindex="-1" href="/project/project/">塞纳丽舍</a>
+					        </li>
+					        <li>
+					        	<a tabindex="-1" href="#">万达广场</a>
+					        </li>
+					        <li>
+					        	<a tabindex="-1" href="#">城北公寓</a>
+					        </li>
+					        <li>
+					        	<a tabindex="-1" href="#">积水住宅</a>
+					        </li>
+					      </ul>
+					    </li>
+
+					    <li class="dropdown-submenu">
+					      <a tabindex="-1" href="#">2013</a>
+					      <ul class="dropdown-menu">
+
+					      	<li><a tabindex="-1" href="#">太仓世家</a></li>
+					      	<li><a tabindex="-1" href="#">沙溪一号</a></li>
+					      </ul>
+					    </li>
+
+					  </ul>
+					</div>
+					<div class="btn-group">
+					  <<button class="btn btn-warning dropdown-toggle" data-toggle="dropdown">资金审核<span class="caret"></span></button>>
+					  <ul class="dropdown-menu">
+					    <!-- dropdown menu links -->
+
+					  </ul>
+					</div>
+				</div>				
+		</div>
+
+	</body>
+</html>

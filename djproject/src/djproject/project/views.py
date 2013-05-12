@@ -65,3 +65,26 @@ def getProjects():
     projects = Project.objects.all()
     print "projects:"+str(projects)
     return projects
+
+def projects(request):
+    projects = getProjects()
+    # Session it with default value.
+    projectId = projects[0].name
+    request.session['projectId'] = projectId
+    print "request.session.projectId:"+request.session['projectId']
+    # Context
+    context = RequestContext(request)
+    context['session_projectId'] = projectId
+    # Access projectId with 'projectId' variable 
+    return render_to_response('project/projects.html',
+                              {
+                                          'projectId': projectId,
+                                          'projects':projects
+                              },
+                              context_instance=context)
+
+def project(request):
+    return render_to_response('project/project.html')
+
+def contacts(request):
+    return render_to_response('project/contacts.html')
