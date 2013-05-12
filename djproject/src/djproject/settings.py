@@ -48,9 +48,11 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+CURRENT_DIR = os.path.dirname(__file__).replace('\\','/')
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = 'C:/MediaROOT/'
+MEDIA_ROOT = os.path.join(CURRENT_DIR, 'medias/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -66,7 +68,9 @@ STATIC_ROOT = ''
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/medias/'
 
-CURRENT_DIR = os.path.dirname(__file__).replace('\\','/')
+
+
+
 
 ADMIN_MEDIA_ROOT = os.path.join(CURRENT_DIR, 'admin-media/')
 ADMIN_MEDIA_PREFIX = 'http:/localhost:8000/admin-media/'

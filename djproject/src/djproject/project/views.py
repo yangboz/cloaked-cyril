@@ -14,6 +14,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth import authenticate,login,logout
 import os
+from djproject.project.forms import MyPhotoForm
+from djproject.project.models import MyPhoto
 
 @csrf_exempt
 def login_view(request):    
@@ -91,12 +93,13 @@ def project(request):
 def contacts(request):
     return render_to_response('project/contacts.html')
 
-def upload(request):
-    return render_to_response('project/upload.html')
+def file(request):
+    return render_to_response('project/file.html')
 
 @csrf_exempt
-def uploadphoto(request):
+def uploadFile(request):
     if request.method == 'POST':
+       print 'filename' in request.FILES
        file = request.FILES.get('filename','')
 
        filename=file.name
@@ -124,4 +127,23 @@ def uploadphoto(request):
        fp.close()
 
     return HttpResponse('ok')
+
+def photo(request):
+    return render_to_response('project/uploadPhoto.html')
+
+@csrf_exempt
+def uploadPhoto(request):
+
+    print request.FILES
+    print 'filename' in request.FILES
+    if 'filename' in request.FILES:  
+        image = request.FILES["filename"]
+
+    else:
+        image=None
+
+    photo = MyPhoto(image=image)
+    photo.save()
+
+    return render_to_response('project/uploadedPhoto.html', {'photo':photo})
 
