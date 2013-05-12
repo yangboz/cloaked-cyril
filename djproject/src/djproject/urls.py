@@ -41,6 +41,9 @@ urlpatterns = patterns('',
     (r'^project/projects/$', 'djproject.project.views.projects'),
     (r'^project/project/$', 'djproject.project.views.project'),
     (r'^project/contacts/$', 'djproject.project.views.contacts'),
+    (r'^project/contacts/contact_new/$', 'djproject.project.views.contact_new'),
+    (r'^project/contacts/uploadphoto/$', 'djproject.project.views.uploadphoto'),
+    (r'^project/contacts/upload/$', 'djproject.project.views.upload'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

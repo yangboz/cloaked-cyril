@@ -8,10 +8,12 @@ from django.utils import simplejson
 
 from djproject.employees.models import Employee, Department
 from djproject.project.models import Project
+from djproject import settings
 
 from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth import authenticate,login,logout
+import os
 
 @csrf_exempt
 def login_view(request):    
@@ -88,3 +90,38 @@ def project(request):
 
 def contacts(request):
     return render_to_response('project/contacts.html')
+
+def upload(request):
+    return render_to_response('project/upload.html')
+
+@csrf_exempt
+def uploadphoto(request):
+    if request.method == 'POST':
+       file = request.FILES.get('filename','')
+
+       filename=file.name
+
+       fname = os.path.join(settings.MEDIA_ROOT,filename)
+
+       if os.path.exists(fname):  
+         os.remove(fname)
+
+         dirs= os.path.dirname(fname) 
+
+         if not os.path.exists(dirs):  
+            os.makedirs(dirs)  
+
+       if os.path.isfile(fname): 
+             os.remove(fname) 
+ 
+
+       fp = open(fname, 'wb')  
+
+       for content in file.chunks(): 
+
+         fp.write(content)
+
+       fp.close()
+
+    return HttpResponse('ok')
+
