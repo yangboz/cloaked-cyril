@@ -65,8 +65,9 @@
 				        //specifying a dataType of json makes jQuery pre-eval the response for us
 				        // alert(result);
 				        console.log("GetProjectId:",result);
-				        //TODO:ProjectId selection
+				        //Update projectId selection
 				         $('#projectSelect').val(result);
+				         // $('#projectSelect').attr("value",result);
 				    },
 				    error:function(xhr,status,error)
 				    {
@@ -189,7 +190,7 @@
 				<a id="projectAherf" class="brand">荣宇工程</a>
 				<select required="required" class="input-xlarge">
                 	{% for project in projects %}
-				    	<option>{{ project.year }}</option>
+				    	<option value="{{ project.year }}">{{ project.year }}</option>
 				    {% endfor %}
                 </select>
 			</div>
