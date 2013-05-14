@@ -1,5 +1,4 @@
-# Create your views here.
-# Create your views here.
+#coding=utf-8#
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.template import RequestContext
@@ -11,7 +10,7 @@ from djproject.project.models import Project
 
 def duty_json(request):
     duty_list = Duty.objects.all()
-    return HttpResponse(simplejson.dumps(duty_list))
+    return HttpResponse(simplejson.dumps(duty_list,ensure_ascii=True))
 
 def duty_list(request):
     projects = getProjects()
