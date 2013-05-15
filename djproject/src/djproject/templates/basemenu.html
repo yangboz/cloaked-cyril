@@ -76,6 +76,25 @@
 				        console.log("GetProjectId error:",error);
 				    }
 				 });
+				 //Ajax call
+	          	$.ajax({
+				    type:"GET",
+				    url:"http://127.0.0.1:8000/project/getTreeMenusRoot/",
+				    dataType: "json",
+				    success:function(result,status,xhr)
+				    {
+				        //specifying a dataType of json makes jQuery pre-eval the response for us
+				        // alert(result);
+				        console.log("getTreeMenusRoot:",result);
+				        //Update getTreeMenusRoot drop-down list
+				    },
+				    error:function(xhr,status,error)
+				    {
+				        //specifying a dataType of json makes jQuery pre-eval the response for us
+				        // alert(results);
+				        console.log("getTreeMenusRoot error:",error);
+				    }
+				 });
 				//ProjectId change handler
 				$('#projectSelect').change(function() {
 		          	// alert($(this).val());
@@ -169,7 +188,7 @@
                 <select id="projectSelect" required="required" class="input-xlarge">
                 	<option value="">请选择一个工程</option>
                 	{% for project in projects %}
-				    	<option value="{{ project.year }}">{{ project.year }}</option>
+				    	<option value="{{ project.year }}">{{ project.name }}</option>
 				    {% endfor %}
                 </select>
                 <div data-role="acknowledgement"><i></i></div>
@@ -190,16 +209,17 @@
 				<a id="projectAherf" class="brand">荣宇工程</a>
 				<select required="required" class="input-xlarge">
                 	{% for project in projects %}
-				    	<option value="{{ project.year }}">{{ project.year }}</option>
+				    	<option value="{{ project.year }}">{{ project.name }}</option>
 				    {% endfor %}
                 </select>
+                <div>{{rootMenus}}</div>
 			</div>
 		</div>
 		{% ifequal menu_type "unordered-list" %}
 		<div class="navbar">
 			<div class="navbar-inner">
 				<!-- Hard code this project name.-->
-				<ul class="nav nav-tabs">
+				<ul class="nav nav-tabs"><div>{{rootMenus}}</div>
 					<!-- Root -->
 					{% for menu_item in menu.root_item.children %}
 					<!-- Level 1-->

@@ -1,4 +1,4 @@
-# Create your views here.
+# coding = UTF-8
 from django.shortcuts import get_object_or_404,render_to_response
 from django.http import HttpRequest
 from django.http import HttpResponse
@@ -16,6 +16,8 @@ from django.contrib.auth import authenticate,login,logout
 import os
 #from djproject.project.forms import MyPhotoForm
 from djproject.project.models import MyPhoto
+
+from treemenus.models import Menu
 
 @csrf_exempt
 def login_view(request):    
@@ -79,6 +81,18 @@ def getProjects():
     projects = Project.objects.all()
     print "projects:"+str(projects)
     return projects
+
+@csrf_exempt
+def getTreeMenusRoot(request):
+    #@see:http://www.lichun.cc/blog/2012/06/a-simple-ajax-example-on-django-1-4/
+    if request.is_ajax() and request.method == "GET":
+        mimetype = "application/json;charset=UTF-8";
+        # Model
+        rootMenus = Menu.objects.all()
+        print("rootMenus:"+str(rootMenus))
+        return HttpResponse(simplejson.dumps(rootMenus), mimetype);
+    else:
+        return HttpResponse("This is not an valid request");
 
 def projects(request):
     projects = getProjects()
@@ -156,4 +170,3 @@ def uploadPhoto(request):
     photo.save()
 
     return render_to_response('project/uploadedPhoto.html', {'photo':photo})
-
