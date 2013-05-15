@@ -1,10 +1,14 @@
 @charset "utf-8";
 /* CSS Document */
 
-.grid_table{width:780px; margin:20px auto}
+.grid_table{ margin:20px 10px;}
+.grid_table input[type=text]{width:100px;}
+.grid_table .ui-pg-input{ width:40px; text-align:center; height: 25px;}
+#gbox_grid_id{ margin:0 auto;}
 td a{color:#369}
 #opt{height:32px; }
 #query{float:right; width:450px; text-align:right}
+#query label{display: inline;}
 
 .nodata{display:block; position:absolute; top:100px; left:35%; padding:6px 20px; border:1px solid #fc9; background:#ffc}
 
