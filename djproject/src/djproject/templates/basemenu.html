@@ -68,8 +68,8 @@
 				        // alert(result);
 				        console.log("GetProjectId:",result);
 				        //Update projectId selection
-				         $('#projectSelect').val(result);
-				         // $('#projectSelect').attr("value",result);
+				        //@see:http://silviomoreto.github.io/bootstrap-select/
+				         $('#projectSelect').selectpicker('val', result);
 				    },
 				    error:function(xhr,status,error)
 				    {
@@ -186,11 +186,11 @@
 		    <h3 id="myModalLabel"></h3>
 		  </div>
 		  <div class="modal-body">
-		  	<div class="span12 input-append" data-role="acknowledge-input">
-                <select id="projectSelect" required="required" class="input-xlarge">
+		  	<div class="span12 input-append" data-role="acknowledge-input" data-container="body">
+                <select required="required" class="input-xlarge">
                 	<option value="">请选择一个工程</option>
                 	{% for project in projects %}
-				    	<option value="{{ project.year }}">{{ project.name }}</option>
+				    	<option value="{{ project.year }}">{{ project.year }}</option>
 				    {% endfor %}
                 </select>
                 <div data-role="acknowledgement"><i></i></div>
@@ -208,12 +208,16 @@
 		<div class="navbar">
 			<div class="navbar-inner">
 				<a id="projectAherf" class="brand">荣宇工程</a>
-				<select required="required" class="input-xlarge">
+				<select id="projectSelect" required="required" class="input-xlarge show-tick" data-style="btn-primary" data-width="100px">
                 	{% for project in projects %}
-				    	<option value="{{ project.year }}">{{ project.name }}</option>
+				    	<option value="{{ project.year }}">{{ project.year }}</option>
 				    {% endfor %}
                 </select>
-                <div>{{rootMenus}}</div>
+                <select required="required" class="input-xlarge" data-style="btn-warning" data-width="100px">
+                	{% for rootMenuItem in rootMenus %}
+				    	<option value="{{ rootMenuItem.name }}">{{ rootMenuItem.name }}</option>
+				    {% endfor %}
+                </select>
 			</div>
 		</div>
 		{% ifequal menu_type "unordered-list" %}

@@ -19,6 +19,9 @@ from djproject.project.models import MyPhoto
 
 from treemenus.models import Menu
 
+from django.utils.log import getLogger
+logger = getLogger('project.views')
+
 @csrf_exempt
 def login_view(request):    
     user = authenticate(username=request.POST['username'], password=request.POST['password'])
@@ -41,6 +44,7 @@ def logout_view(request):
 
 def index(request):
     projects = getProjects()
+    # JsonPickle testing
     # Context
     context = RequestContext(request)
     # Access projectId with 'projectId' variable 
@@ -88,8 +92,11 @@ def getTreeMenusRoot(request):
     if request.is_ajax() and request.method == "GET":
         mimetype = "application/json;charset=UTF-8";
         # Model
-        rootMenus = Menu.objects.all()
-        print("rootMenus:"+str(rootMenus))
+        menuModel = Menu.objects.all()
+        rootMenus = []
+#        for x in range(0,len(menuModel)):
+#            rootMenus.append(menuModel[x])
+#        print("rootMenus:"+str(rootMenus))
         return HttpResponse(simplejson.dumps(rootMenus), mimetype);
     else:
         return HttpResponse("This is not an valid request");

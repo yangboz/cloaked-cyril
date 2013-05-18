@@ -22,7 +22,6 @@
 			url : 'http://127.0.0.1:8000/contact/contact_json',
 			datatype : "json",
 			mtype: 'GET',
-			height : 250,
 			colNames : ['序号', '姓名', '性别', '职务', '人工费/日', '身份证', '联系方式', '备注'],
 			colModel : [{
 				name : 'id',
@@ -69,6 +68,10 @@
 				width : 280,
 				sortable : false
 			}],
+			autowidth: true,
+			autoHeight: true,
+			multiselect: true,
+			multiselectWidth: 25,
 			viewrecords : true,
 			multiselect : false,
 			caption : "花名册列表",
@@ -84,7 +87,7 @@
             },  
 		});
 		
-		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:true,edit:false});
+		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false});
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false,search:false});
 		// jQuery("#grid_id").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{});
