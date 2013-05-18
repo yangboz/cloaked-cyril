@@ -56,8 +56,8 @@
 				//AcknowlegeInput
 				//@see:http://averagemarcus.github.io/Bootstrap-AcknowledgeInputs/#using
 				$().acknowledgeinput();
-				//Get projectId
-				//Ajax call
+				//Ajax calls
+				//Get project Id.
 	          	$.ajax({
 				    type:"GET",
 				    url:"http://127.0.0.1:8000/project/getProjectId/",
@@ -78,8 +78,29 @@
 				        console.log("GetProjectId error:",error);
 				    }
 				 });
-				 //Ajax call
-				//ProjectId change handler
+				 //Get project's asset ID
+				 $.ajax({
+				    type:"GET",
+				    url:"http://127.0.0.1:8000/project/getTreeMenusRootId/",
+				    dataType: "json",
+				    success:function(result,status,xhr)
+				    {
+				        //specifying a dataType of json makes jQuery pre-eval the response for us
+				        // alert(result);
+				        console.log("getTreeMenusRootId:",result);
+				        //Update projectId selection
+				        //@see:http://silviomoreto.github.io/bootstrap-select/
+				         $('#assetSelect').selectpicker('val', result);
+				    },
+				    error:function(xhr,status,error)
+				    {
+				        //specifying a dataType of json makes jQuery pre-eval the response for us
+				        // alert(results);
+				        console.log("getTreeMenusRootId error:",error);
+				    }
+				 });
+				//Select change handlers
+				//Project Select change handler
 				$('#projectSelect').change(function() {
 		          	// alert($(this).val());
 		          	//Ajax call
@@ -99,6 +120,24 @@
 					         console.log("Selected project id:",result);
 					         // Update ahref's label
 					         // $("#projectAherf").text($("#projectAherf").text()+result);
+					    }
+					 );
+			    });
+			    //Asset Select change handler
+				$('#assetSelect').change(function() {
+		          	// alert($(this).val());
+		          	//Ajax call
+		          	$.post(
+					    // type:"POST",
+					    "http://127.0.0.1:8000/project/setTreeMenusRootId/",
+					    // dataType: "json",
+					    {
+					    	'treeMenusRootId':$(this).val()
+					    },
+					    function(result,status,xhr)
+					    {
+					        alert("Selected treeMenusRootId:",result);
+					        console.log("Selected treeMenusRootId:",result);
 					    }
 					 );
 			    });
@@ -194,7 +233,7 @@
 				    	<option value="{{ project.year }}">{{ project.name }}</option>
 				    {% endfor %}
                 </select>
-                <select required="required" class="input-xlarge" data-style="btn-warning" data-width="100px">
+                <select id="assetSelect" required="required" class="input-xlarge show-tick" data-style="btn-warning" data-width="100px">
                 	{% for rootMenuItem in rootMenus %}
 				    	<option value="{{ rootMenuItem }}">{{ rootMenuItem }}</option>
 				    {% endfor %}

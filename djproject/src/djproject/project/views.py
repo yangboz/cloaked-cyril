@@ -93,9 +93,25 @@ def setTreeMenusRootId(request):
     #@see:http://www.lichun.cc/blog/2012/06/a-simple-ajax-example-on-django-1-4/
     if request.is_ajax() and request.method == "POST":
         mimetype = "application/json";
-        request.session['treeMenuRootId'] =  request.POST["treeMenuRootId"]
-        print(" request.session.treeMenuRootId:"+request.session['treeMenuRootId'])
-        return HttpResponse(request.session['treeMenuRootId'], mimetype);
+        request.session['treeMenusRootId'] =  request.POST["treeMenusRootId"]
+        print("request.session.treeMenusRootId:"+request.session['treeMenusRootId'])
+        return HttpResponse(request.session['treeMenusRootId'], mimetype);
+    else:
+        return HttpResponse("This is not an valid request");
+
+@csrf_exempt
+def getTreeMenusRootId(request):
+    #@see:http://www.lichun.cc/blog/2012/06/a-simple-ajax-example-on-django-1-4/
+    if request.is_ajax() and request.method == "GET":
+        mimetype = "application/json";
+        #if session kept.
+        curTreeMenusRootId = request.session['treeMenusRootId']
+        if curTreeMenusRootId is None:
+            treeMeunsRootIds = getTreeMenusRoot()
+            # Session it with default value.
+            curTreeMenusRootId = treeMeunsRootIds[0]
+        print("getTreeMenusRootId:"+curTreeMenusRootId)
+        return HttpResponse(simplejson.dumps(curTreeMenusRootId), mimetype);
     else:
         return HttpResponse("This is not an valid request");
 
