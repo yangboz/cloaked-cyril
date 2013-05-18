@@ -1,7 +1,6 @@
 {% extends "contacts/base.html" %}
 
 {% block content %}
-
 <!--@see:http://www.helloweba.com/demo/jqGrid/opt.html#-->
 <div class="grid_table">
      <div id="opt">
@@ -27,45 +26,53 @@
 				name : 'id',
 				index : 'id',
 				width : 60,
+				editable:false,
 				sorttype : "int"
 			}, {
 				name : 'name',
 				index : 'name',
+				editable:true,
 				width : 100
 			}, {
 				name : 'sex',
 				index : 'amount',
 				width : 80,
 				align : "right",
+				editable:true,
 				sorttype : "float"
 			}, {
 				name : 'job',
 				index : 'tax',
 				width : 80,
 				align : "right",
+				editable:true,
 				sorttype : "float"
 			}, {
 				name : 'laborCost',
 				index : 'total',
 				width : 80,
 				align : "right",
+				editable:true,
 				sorttype : "float"
 			}, {
 				name : 'IDcard',
 				index : 'total',
 				width : 280,
 				align : "right",
+				editable:true,
 				sorttype : "float"
 			}, {
 				name : 'contact',
 				index : 'total',
 				width : 280,
 				align : "right",
+				editable:true,
 				sorttype : "float"
 			}, {
 				name : 'notes',
 				index : 'note',
 				width : 280,
+				editable:true,
 				sortable : false
 			}],
 			autowidth: true,
@@ -87,7 +94,7 @@
             },  
 		});
 		
-		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false});
+		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:true,edit:false});
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false,search:false});
 		// jQuery("#grid_id").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{});
@@ -97,7 +104,7 @@
 </script>
 
 <table id="grid_id"></table>
-<div id="grid_pager" style="height:40px;"></div>
+<div id="grid_pager" style="height:50px;"></div>
 
 
 <div id="messages">

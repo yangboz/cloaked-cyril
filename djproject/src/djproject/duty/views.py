@@ -10,7 +10,17 @@ from djproject.project.models import Project
 import djproject.project.views as projectView
 
 def duty_json(request):
-    duty_list = Duty.objects.all()#TODO:Need custom class for serialization.
+    duty_all = Duty.objects.all()#TODO:Need custom class for serialization.
+    duty_list = []
+    for x in range(0,len(duty_all)):
+        duty_list.append({
+                          'name':duty_all[x].name,
+                          'project':duty_all[x].project.name,
+                          'month':duty_all[x].month,
+                          'classes':duty_all[x].classes,
+                          'days':duty_all[x].days,
+                        })
+#    print("duty_list:"+str(duty_list))
     return HttpResponse(simplejson.dumps(duty_list,ensure_ascii=True))
 
 def duty_list(request):

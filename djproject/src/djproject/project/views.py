@@ -121,7 +121,7 @@ def getTreeMenusRoot():
     rootMenus = []
     for x in range(0,len(menuModel)-1):
         rootMenus.append(menuModel[x].name)
-    print("rootMenus:"+str(rootMenus))
+#    print("rootMenus:"+str(rootMenus))
     return rootMenus
 
 def projects(request):

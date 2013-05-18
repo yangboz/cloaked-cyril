@@ -3,7 +3,7 @@
 
 .grid_table{ margin:20px 10px;}
 .grid_table input[type=text]{width:100px;}
-.ui-pg-input{ width:40px; text-align:center; height: 100%;}
+.ui-pg-input{ width:40px; text-align:center; height: 40px;}
 .input{margin-top: 10px;}
 #gbox_grid_id{ margin:0 auto;}
 td a{color:#369}

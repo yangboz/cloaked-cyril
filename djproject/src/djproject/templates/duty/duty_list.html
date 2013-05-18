@@ -11,25 +11,35 @@
 			datatype : "json",
 			mtype: 'GET',
 			height : 250,
-			colNames : ['序号', '姓名', '日期', '合计'],
+			colNames : ['班组','姓名', '工程', '月份','日期','合计'],
 			colModel : [{
-				name : 'id',
-				index : 'id',
+				name : 'classes',
+				index : 'classes',
 				width : 60,
+				align: 'center',
 				sorttype : "int"
 			}, {
 				name : 'name',
 				index : 'name',
 				width : 100
+			},{
+				name : 'project',
+				index : 'project',
+				width : 100
 			}, {
-				name : 'date',
-				index : 'total',
+				name : 'month',
+				index : 'month',
 				width : 280,
-				align : "right",
+				align: 'center',
 				sorttype : "float"
 			}, {
+				name : 'days',
+				index : 'days',
+				width : 280,
+				sortable : false
+			}, {
 				name : 'total',
-				index : 'note',
+				index : 'total',
 				width : 280,
 				sortable : false
 			}],
@@ -48,7 +58,7 @@
             },  
 		});
 		
-		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:true,edit:false});
+		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:true,add:true,edit:false});
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false,search:false});
 		// jQuery("#grid_id").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{});
