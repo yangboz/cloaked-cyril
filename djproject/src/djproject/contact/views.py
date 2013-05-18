@@ -7,6 +7,7 @@ from django.utils import simplejson
 
 from djproject.employees.models import Employee
 from djproject.project.models import Project
+import djproject.project.views as projectView
 
 def contact_json(request):
     object_list = [
@@ -24,10 +25,14 @@ def contact_json(request):
     return HttpResponse(simplejson.dumps(object_list))
 
 def contact_list(request):
-    projects = getProjects()
+    projects = projectView.getProjects()
+    rootMenus = projectView.getTreeMenusRoot()
     return render_to_response(
                                 'contacts/contact_list.html',
-                                dictionary={'projects':projects},
+                                dictionary={
+                                            'projects':projects,
+                                            'rootMenus':rootMenus
+                                            },
                                 context_instance=RequestContext(request)
                               )
 
@@ -39,9 +44,3 @@ def contact_new(request):
     e.save()
 
     return HttpResponse(Employee.objects.filter(name=name))
-
-def getProjects():
-    # Model
-    projects = Project.objects.all()
-    print "projects:"+str(projects)
-    return projects

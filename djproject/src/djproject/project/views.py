@@ -44,13 +44,15 @@ def logout_view(request):
 
 def index(request):
     projects = getProjects()
-    # JsonPickle testing
+    # Model
+    rootMenus = getTreeMenusRoot()
     # Context
     context = RequestContext(request)
     # Access projectId with 'projectId' variable 
     return render_to_response('project/project_index.html',
                               dictionary={
-                                          'projects':projects
+                                          'projects':projects,
+                                          'rootMenus':rootMenus
                                           },
                               context_instance=context)
 @csrf_exempt
@@ -87,19 +89,24 @@ def getProjects():
     return projects
 
 @csrf_exempt
-def getTreeMenusRoot(request):
+def setTreeMenusRootId(request):
     #@see:http://www.lichun.cc/blog/2012/06/a-simple-ajax-example-on-django-1-4/
-    if request.is_ajax() and request.method == "GET":
-        mimetype = "application/json;charset=UTF-8";
-        # Model
-        menuModel = Menu.objects.all()
-        rootMenus = []
-#        for x in range(0,len(menuModel)):
-#            rootMenus.append(menuModel[x])
-#        print("rootMenus:"+str(rootMenus))
-        return HttpResponse(simplejson.dumps(rootMenus), mimetype);
+    if request.is_ajax() and request.method == "POST":
+        mimetype = "application/json";
+        request.session['treeMenuRootId'] =  request.POST["treeMenuRootId"]
+        print(" request.session.treeMenuRootId:"+request.session['treeMenuRootId'])
+        return HttpResponse(request.session['treeMenuRootId'], mimetype);
     else:
         return HttpResponse("This is not an valid request");
+
+def getTreeMenusRoot():
+    # Model
+    menuModel = Menu.objects.all()
+    rootMenus = []
+    for x in range(0,len(menuModel)-1):
+        rootMenus.append(menuModel[x].name)
+    print("rootMenus:"+str(rootMenus))
+    return rootMenus
 
 def projects(request):
     projects = getProjects()

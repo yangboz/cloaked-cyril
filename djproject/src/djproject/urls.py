@@ -47,7 +47,7 @@ urlpatterns = patterns('',
     (r'^project/contacts/file/$', 'djproject.project.views.file'),
     (r'^project/contacts/uploadPhoto/$', 'djproject.project.views.uploadPhoto'),
     (r'^project/contacts/photo/$', 'djproject.project.views.photo'),
-    (r'^project/getTreeMenusRoot/$', 'djproject.project.views.getTreeMenusRoot'),
+    (r'^project/setTreeMenusRootId/$', 'djproject.project.views.setTreeMenusRootId'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

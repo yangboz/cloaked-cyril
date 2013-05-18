@@ -7,16 +7,22 @@ from django.utils import simplejson
 
 from djproject.duty.models import Duty
 from djproject.project.models import Project
+import djproject.project.views as projectView
 
 def duty_json(request):
-    duty_list = Duty.objects.all()
+    duty_list = Duty.objects.all()#TODO:Need custom class for serialization.
     return HttpResponse(simplejson.dumps(duty_list,ensure_ascii=True))
 
 def duty_list(request):
-    projects = getProjects()
+    #Model
+    projects = projectView.getProjects()
+    rootMenus = projectView.getTreeMenusRoot()
     return render_to_response(
                                 'duty/duty_list.html',
-                                dictionary={'projects':projects},
+                                dictionary={
+                                            'projects':projects,
+                                            'rootMenus':rootMenus
+                                            },
                                 context_instance=RequestContext(request)
                               )
 
