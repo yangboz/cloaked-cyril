@@ -6,7 +6,7 @@ from django.template import RequestContext
 
 from django.utils import simplejson
 
-from djproject.employees.models import Employee, Department
+from djproject.labors.models import Labor, Department
 from djproject.project.models import Project
 from djproject import settings
 

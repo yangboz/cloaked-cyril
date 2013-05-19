@@ -5,7 +5,7 @@ from django.template import RequestContext
 
 from django.utils import simplejson
 
-from djproject.employees.models import Employee
+from djproject.labors.models import Labor
 from djproject.contact.models import Contact
 import djproject.project.views as projectView
 
@@ -40,7 +40,7 @@ def contact_list(request):
 def contact_new(request):
     name = request.GET['name']
 
-    e = Employee(name=name, department_id=1, laborCost=1, sex=True, contact="contact", notes="this is notes")
-    e.save()
+    labor = Labor(name=name, department_id=1, laborCost=1, sex=True, contact="contact", notes="this is notes")
+    labor.save()
 
-    return HttpResponse(Employee.objects.filter(name=name))
+    return HttpResponse(Labor.objects.filter(name=name))

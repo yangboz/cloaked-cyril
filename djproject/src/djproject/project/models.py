@@ -2,6 +2,7 @@
 
 from django.db import models
 
+#项目
 class Project(models.Model):
     name = models.CharField(max_length=200, blank=False)
     address = models.CharField(max_length=200)
