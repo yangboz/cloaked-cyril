@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     'djproject.project',
     'djproject.employees',
     'djproject.duty',
+    'djproject.contact',
     'treemenus',
 )
 
