@@ -146,6 +146,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'djproject.jobs',
     'djproject.project',
+    'djproject.contact',
     'djproject.duty',
     'djproject.labors',
     'treemenus',

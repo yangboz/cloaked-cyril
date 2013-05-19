@@ -20,7 +20,7 @@ class Labor(models.Model):
     job = models.CharField(max_length=200)
     laborCost = models.IntegerField()
     IDCard = models.CharField(max_length=50)
-    contact = models.CharField(max_length=300)
+    contactWay = models.CharField(max_length=300)
     notes = models.CharField(max_length=500)
 
     def __unicode__(self):

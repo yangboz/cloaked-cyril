@@ -52,6 +52,11 @@
 					$('#loginModal').modal('hide');
 				{% else %}
 					$('#loginModal').modal('hide');
+					// $('#loginModal').modal({
+						// keyboard: false,
+  						// backdrop: 'static',
+  						// show: true
+					// });
 				{% endif %}
 				//AcknowlegeInput
 				//@see:http://averagemarcus.github.io/Bootstrap-AcknowledgeInputs/#using
@@ -169,6 +174,16 @@
 					    }
 					 });
 			    });
+			    //Tool bar button functions
+			    $("#add_btn").click(function(){
+					jQuery("#grid_id").jqGrid('editGridRow',"new",{height:280,reloadAfterSubmit:false});
+				});
+				$("#edit_btn").click(function(){
+					jQuery("#grid_id").jqGrid('editGridRow',"edit",{height:280,reloadAfterSubmit:false});
+				});
+				$("#del_btn").click(function(){
+					jQuery("#grid_id").jqGrid('editGridRow',"del",{height:280,reloadAfterSubmit:false});
+				});
 			});
 		</script>
 	</header>
@@ -303,7 +318,18 @@
 			</div>
 		</div>
 		{% endifequal %}
-
+		<!--@see:http://www.helloweba.com/demo/jqGrid/opt.html#-->
+		<div class="grid_table">
+		     <div id="opt">
+		        <div id="query">
+		            <label>姓名：</label><input type="text" class="input" id="title" />
+		            <input type="submit" class="btn" id="find_btn" value="查 询" />
+		        </div>
+		        <input type="button" class="btn" id="add_btn" value="新 增" />
+		        <input type="button" class="btn" id="edit_btn" value="编辑" />
+		        <input type="button" class="btn" id="del_btn" value="删 除" />
+		     </div>
+		</div>
 		{% block content %}{% endblock %}
 
 	</body>
