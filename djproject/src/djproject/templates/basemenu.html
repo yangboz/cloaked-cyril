@@ -96,6 +96,14 @@
 				        //Update projectId selection
 				        //@see:http://silviomoreto.github.io/bootstrap-select/
 				         $('#assetSelect').selectpicker('val', result);
+				         //@see: http://jsperf.com/each-vs-filter
+				         $(".btn-group.rootMenu > button.btn").each(function(){
+				         	if($(this)[0].innerHTML==result)
+				         	{
+				         		console.log($(this)[0]);
+				         		$($(this)[0]).addClass('active');
+				         	}
+				         });
 				    },
 				    error:function(xhr,status,error)
 				    {
@@ -131,20 +139,7 @@
 			    //Asset Select change handler
 				$('#assetSelect').change(function() {
 		          	// alert($(this).val());
-		          	//Ajax call
-		          	$.post(
-					    // type:"POST",
-					    "http://127.0.0.1:8000/project/setTreeMenusRootId/",
-					    // dataType: "json",
-					    {
-					    	'treeMenusRootId':$(this).val()
-					    },
-					    function(result,status,xhr)
-					    {
-					        alert("Selected treeMenusRootId:",result);
-					        console.log("Selected treeMenusRootId:",result);
-					    }
-					 );
+		          	postAssetSelectorChange($(this).val());
 			    });
 			    //Login button
 			    $('#loginBtn').click(function(){
@@ -184,7 +179,34 @@
 				$("#del_btn").click(function(){
 					jQuery("#grid_id").jqGrid('editGridRow',"del",{height:280,reloadAfterSubmit:false});
 				});
+				// Button set
+   				var selectMenuItem = null;
+				$(".btn-group.rootMenu > button.btn").on("click", function(){
+				    selectMenuItem = $(this)[0].innerHTML;
+				    console.log("selectMenuItem:",selectMenuItem);
+				    // alert("Value is " + selectMenuItem);
+				    postAssetSelectorChange(selectMenuItem);
+				});
 			});
+		</script>
+		<script>
+		function postAssetSelectorChange(anewValue)
+		{
+			//Ajax call
+          	$.post(
+			    // type:"POST",
+			    "http://127.0.0.1:8000/project/setTreeMenusRootId/",
+			    // dataType: "json",
+			    {
+			    	'treeMenusRootId':anewValue
+			    },
+			    function(result,status,xhr)
+			    {
+			        alert("Selected treeMenusRootId:",result);
+			        console.log("Selected treeMenusRootId:",result);
+			    }
+			 );
+		}
 		</script>
 	</header>
 	<body>
@@ -253,6 +275,11 @@
 				    	<option value="{{ rootMenuItem }}">{{ rootMenuItem }}</option>
 				    {% endfor %}
                 </select>
+                <div class="btn-group rootMenu" data-toggle="buttons-radio" style="top:-5px;">
+                	{% for rootMenuItem in rootMenus %}
+                		<button type="button" class="btn">{{rootMenuItem}}</button>
+				    {% endfor %}
+				</div>
 			</div>
 		</div>
 		{% ifequal menu_type "unordered-list" %}

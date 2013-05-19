@@ -1,6 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/djproject/duty/views.py=utf-8
-encoding//src/djproject/employees/admin.py=utf-8
-encoding//src/djproject/employees/models.py=utf-8
+encoding//src/djproject/labors/models.py=utf-8
 encoding//src/djproject/project/admin.py=utf-8
 encoding//src/djproject/project/models.py=utf-8
