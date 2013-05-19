@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.utils import simplejson
 
 from djproject.employees.models import Employee
-from djproject.project.models import Project
+from djproject.contact.models import Contact
 import djproject.project.views as projectView
 
 def contact_json(request):
@@ -21,7 +21,7 @@ def contact_json(request):
         {"id":"8","name":"2007-10-03","sex":"test2","job":"note2","laborCost":"300.00","IDcard":"20.00","contact":"320.00","notes":"some notes"},
         {"id":"9","name":"2007-09-01","sex":"test3","job":"note3","laborCost":"400.00","IDcard":"30.00","contact":"430.00","notes":"some notes"}
     ]
-
+    
     return HttpResponse(simplejson.dumps(object_list))
 
 def contact_list(request):

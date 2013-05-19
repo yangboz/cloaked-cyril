@@ -17,34 +17,40 @@
 				index : 'classes',
 				width : 60,
 				align: 'center',
+				editable:true,
 				sorttype : "int"
 			}, {
 				name : 'name',
 				index : 'name',
+				editable:true,
 				width : 100
 			},{
 				name : 'project',
 				index : 'project',
+				editable:true,
 				width : 100
 			}, {
 				name : 'month',
 				index : 'month',
+				editable:true,
 				width : 280,
 				align: 'center',
 				sorttype : "float"
 			}, {
 				name : 'days',
 				index : 'days',
+				editable:true,
 				width : 280,
 				sortable : false
 			}, {
 				name : 'total',
 				index : 'total',
+				editable:true,
 				width : 280,
 				sortable : false
 			}],
 			viewrecords : true,
-			multiselect : false,
+			multiselect : true,
 			caption : "姓名/日期",
 			pager: '#grid_pager',
 			ondblClickRow: function(id){   //双击行 
@@ -58,7 +64,7 @@
             },  
 		});
 		
-		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:true,add:true,edit:false});
+		jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:true,add:true,edit:true});
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{del:false,add:false,edit:false,search:false});
 		// jQuery("#grid_id").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
 		// jQuery("#grid_id").jqGrid('navGrid','#grid_pager',{});
