@@ -270,20 +270,25 @@
 				    	<option value="{{ project.year }}">{{ project.name }}</option>
 				    {% endfor %}
                 </select>
-                <select id="assetSelect" required="required" class="input-xlarge show-tick" data-style="btn-warning" data-width="100px">
+                <!--<select id="assetSelect" required="required" class="input-xlarge show-tick" data-style="btn-warning" data-width="100px">
                 	{% for rootMenuItem in rootMenus %}
 				    	<option value="{{ rootMenuItem }}">{{ rootMenuItem }}</option>
 				    {% endfor %}
-                </select>
+                </select>-->
                 <div class="btn-group rootMenu" data-toggle="buttons-radio" style="top:-5px;">
                 	{% for rootMenuItem in rootMenus %}
-                		<button type="button" class="btn">{{rootMenuItem}}</button>
+                		<span class="label">{{rootMenuItem}}</span>
+                		<select id="assetSelect" required="required" class="input-xlarge show-tick" data-style="btn" data-width="100px">
+		                	{% for menu_item in menu.root_item.children %}
+						    	<option value="{{ menu_item.url }}">{{ menu_item.caption }}</option>
+						    {% endfor %}
+					    </select>
 				    {% endfor %}
 				</div>
 			</div>
 		</div>
 		{% ifequal menu_type "unordered-list" %}
-		<div class="navbar">
+		<div class="navbar" style="display:none">
 			<div class="navbar-inner">
 				<!-- Hard code this project name.-->
 				<ul class="nav nav-tabs">
