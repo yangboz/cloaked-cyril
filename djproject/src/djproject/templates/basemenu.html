@@ -24,6 +24,7 @@
 		<script src="/medias/bootstrap/extensions/select/bootstrap-select.js"></script>
 		<script src="/medias/bootstrap/extensions/bootbox/bootbox.js"></script>
 		<script src="/medias/bootstrap/extensions/acknowledgeInput/bootstrap-acknowledgeinput.min.js"></script>
+		<script src="/medias/bootstrap/twitter-bootstrap-hover-dropdown.js"></script>
 		<!-- jqGrid title font-size -->
 		<style>
 			.ui-jqgrid-title{
@@ -265,17 +266,18 @@
 		<div class="navbar">
 			<div class="navbar-inner">
 				<a id="projectAherf" class="brand">荣宇工程</a>
+				<!--
 				<select id="projectSelect" required="required" class="input-xlarge show-tick" data-style="btn-primary" data-width="100px">
                 	{% for project in projects %}
 				    	<option value="{{ project.year }}">{{ project.name }}</option>
 				    {% endfor %}
                 </select>
-                <!--<select id="assetSelect" required="required" class="input-xlarge show-tick" data-style="btn-warning" data-width="100px">
+                <select id="assetSelect" required="required" class="input-xlarge show-tick" data-style="btn-warning" data-width="100px">
                 	{% for rootMenuItem in rootMenus %}
 				    	<option value="{{ rootMenuItem }}">{{ rootMenuItem }}</option>
 				    {% endfor %}
-                </select>-->
-                <div class="btn-group rootMenu" data-toggle="buttons-radio" style="top:-5px;">
+                </select>
+                <div class="btn-group rootMenu" data-toggle="buttons-radio" style="top:-5px;display:none">
                 	{% for rootMenuItem in rootMenus %}
                 		<span class="label">{{rootMenuItem}}</span>
                 		<select id="assetSelect" required="required" class="input-xlarge show-tick" data-style="btn" data-width="100px">
@@ -285,71 +287,84 @@
 					    </select>
 				    {% endfor %}
 				</div>
-			</div>
-		</div>
-		{% ifequal menu_type "unordered-list" %}
-		<div class="navbar" style="display:none">
-			<div class="navbar-inner">
-				<!-- Hard code this project name.-->
+				-->
 				<ul class="nav nav-tabs">
-					<!-- Root -->
-					{% for menu_item in menu.root_item.children %}
-					<!-- Level 1-->
-					{% if menu_item.has_children %}
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="{{ menu_item.url }}">{{ menu_item.caption }}<b class="caret"></b></a>
+					{% for rootMenuItem in rootMenus %}
+					<li class="offset-right dropdown">
+						<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="{{ rootMenuItem }}">{{ rootMenuItem }}<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							{% for child in menu_item.children %}
-							<!-- Level 2-->
-							{% if child.has_children %}
-							<li class="offset-right dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="{{ child.url }}">{{ child.caption }}<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									{% for childchild in child.children %}
-									<!-- Level 3-->
-									{% if childchild.has_children %}
-									<li>
-										<a href="{{ childchild.url }}">{{ childchild.caption }}</a>
-										<ul>
-											{% for childchildchild in childchild.children %}
-											{% show_menu_item childchildchild %}
-											{% endfor %}
-										</ul>
-									</li>
-									<li class="divider"></li>
-									{% else %}
-									<li>
-										<a href="{{ childchild.url }}">{{ childchild.caption }}</a>
-									</li>
-									<li class="divider"></li>
-									{% endif %}
-									<!-- End Level 3 -->
-									{% endfor %}
-								</ul>
-							</li>
-							<li class="divider"></li>
-							{% else %}
-							<li>
-								<a href="{{ child.url }}">{{ child.caption }}</a>
-							</li>
-							<li class="divider"></li>
-							{% endif %}
-							<!-- End Level 2 -->
-							{% endfor %}
+							<div >
+								{% show_menu rootMenuItem "unordered-list"%}
+							</div>
 						</ul>
 					</li>
-					{% else %}
-					<li>
-						<a href="{{ menu_item.url }}">{{ menu_item.caption }}</a>
-					</li>
-					{% endif %}
-					<!-- End Level 1 -->
 					{% endfor %}
-				</ul><!-- End Root -->
-
+				</ul>		
 			</div>
 		</div>
-		{% endifequal %}
+			{% ifequal menu_type "unordered-list" %}
+			<div class="navbar" >
+				<div class="navbar-inner">
+				<!-- Hard code this project name.-->
+				<ul class="nav nav-tabs">
+				<!-- Root -->
+				{% for menu_item in menu.root_item.children %}
+				<!-- Level 1-->
+				{% if menu_item.has_children %}
+				<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="{{ menu_item.url }}">{{ menu_item.caption }}<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+				{% for child in menu_item.children %}
+				<!-- Level 2-->
+				{% if child.has_children %}
+				<li class="offset-right dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="{{ child.url }}">{{ child.caption }}<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+				{% for childchild in child.children %}
+				<!-- Level 3-->
+				{% if childchild.has_children %}
+				<li>
+				<a href="{{ childchild.url }}">{{ childchild.caption }}</a>
+				<ul>
+				{% for childchildchild in childchild.children %}
+				{% show_menu_item childchildchild %}
+				{% endfor %}
+				</ul>
+				</li>
+				<li class="divider"></li>
+				{% else %}
+				<li>
+				<a href="{{ childchild.url }}">{{ childchild.caption }}</a>
+				</li>
+				<li class="divider"></li>
+				{% endif %}
+				<!-- End Level 3 -->
+				{% endfor %}
+				</ul>
+				</li>
+				<li class="divider"></li>
+				{% else %}
+				<li>
+				<a href="{{ child.url }}">{{ child.caption }}</a>
+				</li>
+				<li class="divider"></li>
+				{% endif %}
+				<!-- End Level 2 -->
+				{% endfor %}
+				</ul>
+				</li>
+				{% else %}
+				<li>
+				<a href="{{ menu_item.url }}">{{ menu_item.caption }}</a>
+				</li>
+				{% endif %}
+				<!-- End Level 1 -->
+				{% endfor %}
+				</ul><!-- End Root -->
+				
+				</div>
+			</div>
+			{% endifequal %}
 		<!--@see:http://www.helloweba.com/demo/jqGrid/opt.html#-->
 		<div class="grid_table">
 		     <div id="opt">
