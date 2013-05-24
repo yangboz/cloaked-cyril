@@ -259,10 +259,7 @@
 		
 		{% load tree_menu_tags %}
 
-		<!-- Prepare and load tree menu system.-->
-		<div style="display:none;">
-			{% show_menu "人工管理" "unordered-list"%}
-		</div>
+		<!-- Navigation bar -->
 		<div class="navbar">
 			<div class="navbar-inner">
 				<a id="projectAherf" class="brand">荣宇工程</a>
@@ -293,18 +290,34 @@
 					<li class="offset-right dropdown">
 						<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="{{ rootMenuItem }}">{{ rootMenuItem }}<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<div >
+							<div style="display: none">{{rootMenuItem}}</div>
+							<div style="display: none">
 								{% show_menu rootMenuItem "unordered-list"%}
 							</div>
+							<div style="display: none">{{menu.root_item.children}}</div>
+							<!-- Root -->
+							{% for menu_item in menu.root_item.children %}
+							<!-- Level 1-->
+							<li><a href="{{ menu_item.url }}">{{ menu_item.caption }}</a></li>
+							{% if menu_item.has_children %}
+							{% endif %}
+							{% endfor %}
 						</ul>
 					</li>
 					{% endfor %}
 				</ul>		
 			</div>
 		</div>
+		
+		<!-- Prepare and load tree menu system.-->
+		<div style="display:none;">
+			{% show_menu "人工管理" "unordered-list" %}
+		</div>
+		
 			{% ifequal menu_type "unordered-list" %}
-			<div class="navbar" >
+			<div class="navbar" style="display: none">
 				<div class="navbar-inner">
+					{{menu.root_item.children}}
 				<!-- Hard code this project name.-->
 				<ul class="nav nav-tabs">
 				<!-- Root -->
@@ -312,7 +325,7 @@
 				<!-- Level 1-->
 				{% if menu_item.has_children %}
 				<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="{{ menu_item.url }}">{{ menu_item.caption }}<b class="caret"></b></a>
+				<a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" href="{{ menu_item.url }}">{{ menu_item.caption }}<b class="caret"></b></a>
 				<ul class="dropdown-menu">
 				{% for child in menu_item.children %}
 				<!-- Level 2-->
